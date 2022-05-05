@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservatieBL", "FitnessReservatieBL\FitnessReservatieBL.csproj", "{183B44A0-15AB-4701-A220-49A7F5E8397E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestApps", "TestApps", "{5FC608DE-7BFD-47A7-AE2A-04B510FFD3A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomeinTest", "DomeinTest\DomeinTest.csproj", "{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{183B44A0-15AB-4701-A220-49A7F5E8397E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{183B44A0-15AB-4701-A220-49A7F5E8397E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{183B44A0-15AB-4701-A220-49A7F5E8397E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3} = {5FC608DE-7BFD-47A7-AE2A-04B510FFD3A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3F8961B-440A-4750-A9CA-471192276104}
