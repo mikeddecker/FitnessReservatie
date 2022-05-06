@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public class Klant {
-        public Klant(int iD, string voornaam, string achternaam, string email) {
+        internal Klant(int iD, string voornaam, string achternaam, string email) {
             ZetID(iD);
             ZetVoornaam(voornaam);
             ZetAchternaam(achternaam);
@@ -21,7 +21,7 @@ namespace FitnessReservatieBL.Domein {
         public string Email { get; private set; }
 
         public void ZetID(int id) {
-            if (id < 0) { throw new KlantException("ZetID - id < 0"); }
+            if (id <= 0) { throw new KlantException("ZetID - id moet groeter zijn dan 0"); }
             ID = id;
         }
         public void ZetVoornaam(string naam) {
@@ -38,7 +38,7 @@ namespace FitnessReservatieBL.Domein {
             if (email.StartsWith("@")) { throw new KlantException("ZetEmail - Email start met @"); }
             if (email.EndsWith("@")) { throw new KlantException("ZetEmail - Email eindigt met @"); }
             if (!email.Substring(email.IndexOf("@")).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen correct domein"); }
-            if (email.Substring(email.IndexOf("@")+1,1).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen domein zoals .be of ..."); }
+            if (email.Substring(email.IndexOf("@") + 1, 1).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen domein zoals .be of ..."); }
             Email = email.Trim();
 
         }

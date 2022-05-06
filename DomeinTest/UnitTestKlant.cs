@@ -17,11 +17,13 @@ namespace DomeinTest {
             Assert.Equal(3, k.ID);
         }
 
-        [Fact]
-        public void ZetId_invalid() {
+        [Theory]
+        [InlineData(-3)]
+        [InlineData(0)]
+        public void ZetId_invalid(int id) {
             Klant k = new Klant(6, "jan", "jansens", "jan.janssens@email.com");
             Assert.Equal(6, k.ID);
-            Assert.Throws<KlantException>(() => k.ZetID(-3));
+            Assert.Throws<KlantException>(() => k.ZetID(id));
         }
 
         [Theory]
@@ -96,6 +98,43 @@ namespace DomeinTest {
         public void ZetEmail_invalid(string email) {
             Klant k = new Klant(3, "mike", "de decker", "ik@gmail.com");
             Assert.Throws<KlantException>(() => k.ZetEmail(email));
+        }
+
+        [Fact]
+        public void Ctor_valid() {
+            Klant k = new Klant(2, "Mike", "De Decker", "mike@hotmail.com");
+            Assert.Equal(2, k.ID);
+            Assert.Equal("Mike", k.Voornaam);
+            Assert.Equal("De Decker", k.Achternaam);
+            Assert.Equal("mike@hotmail.com", k.Email);
+        }
+
+        [Theory]
+        [InlineData(-1, "Jan", "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(0, "Jan", "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(1, "", "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(1, "   ", "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(1, "\n", "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(1, "     \r        ", "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(1, null, "Janssens", "jan.janssens@gmail.com")]
+        [InlineData(1, "Jan", "", "jan.janssens@gmail.com")]
+        [InlineData(1, "Jan", "   ", "jan.janssens@gmail.com")]
+        [InlineData(1, "Jan", "\n", "jan.janssens@gmail.com")]
+        [InlineData(1, "Jan", "   \r ", "jan.janssens@gmail.com")]
+        [InlineData(1, "Jan", null, "jan.janssens@gmail.com")]
+        [InlineData(1, "Jan", "Janssens", "jan.janssens@gmailcom")]
+        [InlineData(1, "Jan", "Janssens", "")]
+        [InlineData(1, "Jan", "Janssens", " ")]
+        [InlineData(1, "Jan", "Janssens", "\n")]
+        [InlineData(1, "Jan", "Janssens", "  \r   ")]
+        [InlineData(1, "Jan", "Janssens", null)]
+        [InlineData(1, "Jan", "Janssens", "jan@")]
+        [InlineData(1, "Jan", "Janssens", "@gmailcom")]
+        [InlineData(1, "Jan", "Janssens", "jan.janssens@.gmailcom")]
+        [InlineData(1, "Jan", "Janssens", "jan@gmailcom")]
+        [InlineData(1, "Jan", "Janssens", "jangmailcom")]
+        public void Ctor_invalid(int id, string voornaam, string achternaam, string email) {
+            Assert.Throws<KlantException>(() => new Klant(id, voornaam, achternaam, email));
         }
     }
 }
