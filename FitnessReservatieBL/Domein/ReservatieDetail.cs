@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public class ReservatieDetail {
-        public int ReservatieDetailID { get; private set; }
         public DateTime Datum { get; private set; }
-        public Toestel Toestel { get; private set; }
         public int Tijdslot { get; private set; }
+        public Toestel Toestel { get; private set; }
 
         //public DateTime beginuur = new DateTime((long)10000 * 1000 * 60 * 60 * 8);
 
@@ -20,8 +19,13 @@ namespace FitnessReservatieBL.Domein {
             Datum = datum;
         }
         public void ZetToestel(Toestel t) {
-            if(t == null) { throw new ReservatieDetailException("ZetToestel - toestel is null"); }
-            
+            if (t == null) { throw new ReservatieDetailException("ZetToestel - toestel is null"); }
+            if (!t.Beschikbaar) { throw new ReservatieDetailException("ZetToestel - toestel is niet beschikbaar"); }
+            Toestel = t;
+        }
+        public void ZetTijdslot(int tijdslotID) { 
+            if (tijdslotID <= 0) { throw new ReservatieDetailException("ZetTijdslot - Ongeldige tijdslotID"); }
+            Tijdslot = tijdslotID;
         }
     }
 }

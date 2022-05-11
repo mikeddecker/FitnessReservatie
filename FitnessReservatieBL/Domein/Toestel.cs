@@ -14,22 +14,18 @@ namespace FitnessReservatieBL.Domein {
 
         public int ToestelID { get; private set; }
         public string Type { get; private set; }
-        public bool Defect { get; private set; }
+        public bool Beschikbaar { get; private set; }
         //public string AfbeeldingUrl { get; private set; }
         public void ZetId(int id) {
-            if (id < 1) { throw new ToestelException("ZetId - id mag niet kleiner zijn dan 1"); }
+            if (id <= 0) { throw new ToestelException("ZetId - id moet groter zijn dan 0"); }
         }
         public void ZetType(string toestelnaam) {
             if (string.IsNullOrWhiteSpace(toestelnaam)) { throw new ToestelException("ZetVoornaam"); }
             Type = toestelnaam.Trim();
         }
-        public void ZetDefect(bool defect) {
-            if (defect == Defect) { throw new ToestelException($"ZetDefect - het toestel {ToestelID} had deze status al");  }
-            Defect = defect;
+        public void ZetBeschikbaarheid(bool beschikbaar) {
+            //if (beschikbaar == Beschikbaar) { throw new ToestelException($"ZetDefect - het toestel {ToestelID} had deze status al");  } // --> niet persé nodig
+            Beschikbaar = beschikbaar;
         }
-        //public void ZetAfbeeldingUrl(string url) {
-        //    if (string.IsNullOrWhiteSpace(url)) { throw new ToestelException("ZetVoornaam"); }
-        //    AfbeeldingUrl = url.Trim();
-        //}
     }
 }

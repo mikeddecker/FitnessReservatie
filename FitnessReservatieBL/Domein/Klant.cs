@@ -39,7 +39,7 @@ namespace FitnessReservatieBL.Domein {
             if (email.EndsWith("@")) { throw new KlantException("ZetEmail - Email eindigt met @"); }
             if (!email.Substring(email.IndexOf("@")).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen correct domein"); }
             if (email.Substring(email.IndexOf("@") + 1, 1).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen domein zoals .be of ..."); }
-            Email = email.Trim();
+            Email = email.Trim().ToLower();
 
         }
     }
