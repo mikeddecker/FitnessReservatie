@@ -11,7 +11,7 @@ namespace DomeinTest {
     public class UnitTestKlant {
         [Fact]
         public void ZetId_valid() {
-            Klant k = new Klant(1, "mike", "de decker", "mikeddecker@hotmail.com");
+            Persoon k = new Klant(1, "mike", "de decker", "mikeddecker@hotmail.com");
             Assert.Equal(1, k.ID);
             k.ZetID(3);
             Assert.Equal(3, k.ID);
@@ -21,7 +21,7 @@ namespace DomeinTest {
         [InlineData(-3)]
         [InlineData(0)]
         public void ZetId_invalid(int id) {
-            Klant k = new Klant(6, "jan", "jansens", "jan.janssens@email.com");
+            Persoon k = new Klant(6, "jan", "jansens", "jan.janssens@email.com");
             Assert.Equal(6, k.ID);
             Assert.Throws<KlantException>(() => k.ZetID(id));
         }
@@ -31,7 +31,7 @@ namespace DomeinTest {
         [InlineData("Janneke     ", "Janneke")]
         [InlineData("     Janneke", "Janneke")]
         public void ZetVoornaam_valid(string naamIn, string naamUit) {
-            Klant k = new Klant(96, "Jos", "Joskens", "eenmaail@mail.me");
+            Persoon k = new Klant(96, "Jos", "Joskens", "eenmaail@mail.me");
             Assert.Equal("Jos", k.Voornaam);
             k.ZetVoornaam(naamIn);
             Assert.Equal(naamUit, k.Voornaam);
@@ -44,7 +44,7 @@ namespace DomeinTest {
         [InlineData("   \r   ")]
         [InlineData(null)]
         public void ZetVoornaam_invalid(string naam) {
-            Klant k = new Klant(10, "Jos", "Joskens", "mail@mail.mail");
+            Persoon k = new Klant(10, "Jos", "Joskens", "mail@mail.mail");
             Assert.Throws<KlantException>(() => k.ZetVoornaam(naam));
         }
 
@@ -54,7 +54,7 @@ namespace DomeinTest {
         [InlineData("De Decker ", "De Decker")]
         [InlineData("     Jannekes", "Jannekes")]
         public void ZetAchternaam_valid(string naamIn, string naamUit) {
-            Klant k = new Klant(96, "Jos", "Joskens", "eenmaail@mail.me");
+            Persoon k = new Klant(96, "Jos", "Joskens", "eenmaail@mail.me");
             Assert.Equal("Joskens", k.Achternaam);
             k.ZetAchternaam(naamIn);
             Assert.Equal(naamUit, k.Achternaam);
@@ -67,7 +67,7 @@ namespace DomeinTest {
         [InlineData("   \r   ")]
         [InlineData(null)]
         public void ZetAchternaam_invalid(string naam) {
-            Klant k = new Klant(10, "Jos", "Joskens", "mail@mail.mail");
+            Persoon k = new Klant(10, "Jos", "Joskens", "mail@mail.mail");
             Assert.Throws<KlantException>(() => k.ZetAchternaam(naam));
         }
 
@@ -78,7 +78,7 @@ namespace DomeinTest {
         [InlineData("mike@gmail.student.com", "mike@gmail.student.com")]
         [InlineData("mike.dedecker@student.hogent.be", "mike.dedecker@student.hogent.be")]
         public void ZetEmail_valid(string emailIn, string emailUit) {
-            Klant k = new Klant(3, "mike", "de decker", "ik@gmail.com");
+            Persoon k = new Klant(3, "mike", "de decker", "ik@gmail.com");
             Assert.Equal("ik@gmail.com", k.Email);
             k.ZetEmail(emailIn);
             Assert.Equal(emailUit, k.Email);
@@ -96,13 +96,13 @@ namespace DomeinTest {
         [InlineData("mike@")]
         [InlineData("mike@.be")]
         public void ZetEmail_invalid(string email) {
-            Klant k = new Klant(3, "mike", "de decker", "ik@gmail.com");
+            Persoon k = new Klant(3, "mike", "de decker", "ik@gmail.com");
             Assert.Throws<KlantException>(() => k.ZetEmail(email));
         }
 
         [Fact]
         public void Ctor_valid() {
-            Klant k = new Klant(2, "Mike", "De Decker", "mike@hotmail.com");
+            Persoon k = new Klant(2, "Mike", "De Decker", "mike@hotmail.com");
             Assert.Equal(2, k.ID);
             Assert.Equal("Mike", k.Voornaam);
             Assert.Equal("De Decker", k.Achternaam);

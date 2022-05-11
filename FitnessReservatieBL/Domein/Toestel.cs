@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public class Toestel {
-        public Toestel(string toestelnaam, bool beschikbaar) {
+        internal Toestel(string toestelnaam, bool beschikbaar) {
             ZetType(toestelnaam);
             ZetBeschikbaarheid(beschikbaar);
             //ZetAfbeeldingUrl(afbeeldingUrl);
