@@ -24,5 +24,14 @@ namespace FitnessReservatieBL.Domein {
             if (einduur <= Beginuur) { throw new TijdslotException("ZetEinduur - Einduur kan niet voor beginuur zijn"); }
             Einduur = einduur;
         }
+
+        public override bool Equals(object obj) { // Tijdslot met hetzelfde ID is al hetzelfde
+            return obj is Tijdslot tijdslot &&
+                   TijdslotID == tijdslot.TijdslotID;
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(TijdslotID);
+        }
     }
 }

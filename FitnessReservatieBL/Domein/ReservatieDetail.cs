@@ -27,5 +27,16 @@ namespace FitnessReservatieBL.Domein {
             if (tijdslotID <= 0) { throw new ReservatieDetailException("ZetTijdslot - Ongeldige tijdslotID"); }
             Tijdslot = tijdslotID;
         }
+
+        public override bool Equals(object obj) {
+            return obj is ReservatieDetail detail &&
+                   Datum == detail.Datum &&
+                   Tijdslot == detail.Tijdslot &&
+                   EqualityComparer<Toestel>.Default.Equals(Toestel, detail.Toestel);
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(Datum, Tijdslot, Toestel);
+        }
     }
 }

@@ -21,11 +21,20 @@ namespace FitnessReservatieBL.Domein {
         }
         public void ZetType(string toestelnaam) {
             if (string.IsNullOrWhiteSpace(toestelnaam)) { throw new ToestelException("ZetVoornaam"); }
-            Type = toestelnaam.Trim();
+            Type = toestelnaam.Trim().ToLower();
         }
         public void ZetBeschikbaarheid(bool beschikbaar) {
             //if (beschikbaar == Beschikbaar) { throw new ToestelException($"ZetDefect - het toestel {ToestelID} had deze status al");  } // --> niet persé nodig
             Beschikbaar = beschikbaar;
+        }
+
+        public override bool Equals(object obj) { // toestel is hetzelfde op basis van ID
+            return obj is Toestel toestel &&
+                   ToestelID == toestel.ToestelID;
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(ToestelID);
         }
     }
 }
