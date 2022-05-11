@@ -15,7 +15,7 @@ namespace DomeinTest {
         [InlineData("Loopband ", "Loopband")]
         [InlineData("     Loopband", "Loopband")]
         public void ZetToestelnaam_valid(string naamIn, string naamUit) {
-            Toestel k = new Toestel("Fiets", "images/url1");
+            Toestel k = new Toestel("Fiets", true);
             Assert.Equal("Fiets", k.Type);
             k.ZetType(naamIn);
             Assert.Equal(naamUit, k.Type);
@@ -28,7 +28,7 @@ namespace DomeinTest {
         [InlineData("   \r   ")]
         [InlineData(null)]
         public void ZetToestelnaam_invalid(string toestelnaamnaam) {
-            Toestel toestel = new Toestel("fiets", "urls/fiets");
+            Toestel toestel = new Toestel("fiets", true);
             Assert.Throws<ToestelException>(() => toestel.ZetType(toestelnaamnaam));
         }
 
@@ -61,7 +61,7 @@ namespace DomeinTest {
 
         [Fact]
         public void Ctor_valid() {
-            Toestel t = new Toestel("loopband", "loopband url");
+            Toestel t = new Toestel("loopband", true);
             Assert.Equal("loopband", t.Type);
             //Assert.Equal("loopband url", t.AfbeeldingUrl);
         }
@@ -77,8 +77,8 @@ namespace DomeinTest {
         [InlineData("loopband", "\n")]
         [InlineData("loopband", "   \r   ")]
         [InlineData("loopband", null)]
-        public void Ctor_invalid(string toestelnaam, string url) {
-            Assert.Throws<ToestelException>(() => new Toestel(toestelnaam, url));
+        public void Ctor_invalid(string toestelnaam, string url) { //TODO
+            Assert.Throws<ToestelException>(() => new Toestel(toestelnaam, false));
         }     
     }
 }
