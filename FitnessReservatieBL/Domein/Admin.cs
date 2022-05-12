@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
-    public abstract class Admin {
+    public class Admin : Persoon {
+        internal Admin(int iD, string voornaam, string achternaam, string email) : base(iD, voornaam, achternaam, email) {
+        }
     }
 }
