@@ -67,17 +67,17 @@ namespace DomeinTest {
         }
 
         [Theory]
-        [InlineData("", "goede url")]
-        [InlineData(" ", "goede url")]
-        [InlineData("\n", "goede url")]
-        [InlineData("   \r   ", "goede url")]
-        [InlineData(null, "goede url")]
-        [InlineData("loopband", "")]
-        [InlineData("loopband", " ")]
-        [InlineData("loopband", "\n")]
-        [InlineData("loopband", "   \r   ")]
-        [InlineData("loopband", null)]
-        public void Ctor_invalid(string toestelnaam, string url) { //TODO
+        [InlineData("")]
+        [InlineData(" ")]
+        [InlineData("\n")]
+        [InlineData("   \r   ")]
+        [InlineData(null)]
+        //[InlineData("loopband", "")]
+        //[InlineData("loopband", " ")]
+        //[InlineData("loopband", "\n")]
+        //[InlineData("loopband", "   \r   ")]
+        //[InlineData("loopband", null)]
+        public void Ctor_invalid(string toestelnaam) { //TODO
             Assert.Throws<ToestelException>(() => new Toestel(toestelnaam, false));
         }     
     }

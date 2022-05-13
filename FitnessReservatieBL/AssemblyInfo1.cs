@@ -17,3 +17,4 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("a21e19f7-b5f8-4471-a087-9c6b32791e8c")]
 [assembly: InternalsVisibleTo("DomeinTest")]
+[assembly: InternalsVisibleTo("FitnessReservatieDL")]

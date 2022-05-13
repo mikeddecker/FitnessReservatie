@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Interfaces {
-    public interface IKlantRepository {
-        bool BestaatKlant(string email);
-        Persoon SelecteerKlant(string email);
+    public interface IPersoonRepository {
+        bool BestaatPersoon(string email);
+        Persoon SelecteerPersoon(string email);
     }
 }

@@ -34,6 +34,7 @@ namespace FitnessReservatieBL.Domein {
             Achternaam = naam.Trim();
         }
         public void ZetEmail(string email) {
+            //TODO emailcontrole opsplitsen naar EmailControle klasse + unit test aanpassen
             if (string.IsNullOrWhiteSpace(email)) { throw new KlantException("ZetEmail - null or white space"); }
             if (!email.Contains("@")) { throw new KlantException("ZetEmail - Email bevat geen @"); }
             if (email.StartsWith("@")) { throw new KlantException("ZetEmail - Email start met @"); }
