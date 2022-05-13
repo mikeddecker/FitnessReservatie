@@ -19,8 +19,9 @@ namespace FitnessReservatieUI {
     /// </summary>
     public partial class KlantReserveertSessieWindow : Window {
         private Klant klant;
-        public KlantReserveertSessieWindow() {
+        public KlantReserveertSessieWindow(Klant klant) {
             InitializeComponent();
+            this.klant = klant;
         }
     }
 }

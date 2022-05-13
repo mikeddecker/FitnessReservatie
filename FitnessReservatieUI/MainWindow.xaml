@@ -27,7 +27,7 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1" Content="FitnessReservatie" FontSize="48"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Name="EmailTextBox" Text="email" Margin="5,5,5,5" FontSize="22" />
+        <TextBox Grid.Row="3" Grid.Column="1" Name="EmailTextBox" Text="mike.dedecker@student.hogent.be" Margin="5,5,5,5" FontSize="22" />
         
         <Button Grid.Row="4" Grid.Column="1" Content="Login" Margin="40,5,40,5" FontSize="28" Background="#FF0064FF" Click="LoginButton_Click"/>
     </Grid>
