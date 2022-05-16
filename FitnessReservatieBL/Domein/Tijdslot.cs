@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public class Tijdslot {
+
+        public Tijdslot(int id, TimeSpan beginuur, TimeSpan einduur) {
+            ZetID(id);
+            ZetBeginUur(beginuur);
+            ZetEinduur(einduur);
+        }
         public int TijdslotID { get; private set; } //id van uit de databank
         public TimeSpan Beginuur { get; private set; }
         public TimeSpan Einduur { get; private set; }
@@ -32,6 +38,9 @@ namespace FitnessReservatieBL.Domein {
 
         public override int GetHashCode() {
             return HashCode.Combine(TijdslotID);
+        }
+        public override string ToString() {
+            return $"{Beginuur.Hours}u tot {Einduur.Hours}u";
         }
     }
 }
