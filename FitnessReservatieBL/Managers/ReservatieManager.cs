@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Managers {
     public class ReservatieManager {
-        private IFitnessRepository Repository;
+        private IReservatieRepository Repository;
 
-        public ReservatieManager(IFitnessRepository repository) {
+        public ReservatieManager(IReservatieRepository repository) {
             Repository = repository;
         }
 

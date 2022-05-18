@@ -41,14 +41,37 @@ namespace FitnessReservatieDL {
 
             } catch (Exception ex) {
                 throw new FitnessRepoADOException("GeefTijdsloten", ex);
-            } finally {
+            }
+            finally {
                 conn.Close();
             }
-    }
+        }
 
         public IReadOnlyList<Toestel> GeefToestellen() {
-            return null; //TODO
-            //throw new NotImplementedException();
+            SqlConnection conn = GetConnection();
+            string query = "SELECT * FROM dbo.Toestel WHERE verwijderd=@verwijderd;";
+            try {
+                List<Toestel> toestellen = new List<Toestel>();
+                using (SqlCommand cmd = conn.CreateCommand()) {
+                    conn.Open();
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("verwijderd", false);
+
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        Toestel t = new Toestel((string)reader["toestel"], (bool)reader["beschikbaar"]);
+                        t.ZetId((int)reader["id"]);
+                        toestellen.Add(t);
+                    }
+                }
+                return toestellen.AsReadOnly();
+
+            } catch (Exception ex) {
+                throw new FitnessRepoADOException("GeefToestellen", ex);
+            }
+            finally {
+                conn.Close();
+            }
         }
     }
 }

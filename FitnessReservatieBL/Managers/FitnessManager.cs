@@ -12,10 +12,10 @@ namespace FitnessReservatieBL.Managers {
 
         private IReadOnlyList<Tijdslot> tijdsloten;
         private IReadOnlyList<Toestel> toestellen;
-        public FitnessManager(IFitnessRepository reservatieRepository) {
-            this.fitnessRepository = reservatieRepository;
-            tijdsloten = reservatieRepository.GeefTijdsloten();
-            toestellen = reservatieRepository.GeefToestellen();
+        public FitnessManager(IFitnessRepository fitnessRepo) {
+            this.fitnessRepository = fitnessRepo;
+            tijdsloten = fitnessRepo.GeefTijdsloten();
+            toestellen = fitnessRepo.GeefToestellen();
         }
         public IReadOnlyList<Tijdslot> GeefTijdsloten() {
             return tijdsloten;

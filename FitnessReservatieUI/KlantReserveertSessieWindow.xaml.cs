@@ -1,5 +1,6 @@
 ﻿using FitnessReservatieBL.Domein;
 using FitnessReservatieBL.Managers;
+using FitnessReservatieDL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
