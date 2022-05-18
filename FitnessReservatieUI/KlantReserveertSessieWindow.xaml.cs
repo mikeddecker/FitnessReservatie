@@ -24,12 +24,18 @@ namespace FitnessReservatieUI {
         public KlantReserveertSessieWindow(Klant klant, FitnessManager fitnessManager) {
             InitializeComponent();
             this.klant = klant;
+
+            // velden invullen en constricties opleggen.
             ReservatieDatePicker.DisplayDateStart = DateTime.Today;
             ReservatieDatePicker.DisplayDateEnd = DateTime.Today.AddDays(7);
             TijdslotComboBox.ItemsSource = fitnessManager.GeefTijdsloten();
-            toestellen = fitnessManager.GeefToestellen();
             ToestelComboBox.ItemsSource = new string[] { "eerst datum en tijd aub", "even geduld aub" };
+
+            // mogelijke toestellen preparen om te vergelijken met huidige reservaties.
+            toestellen = fitnessManager.GeefToestellen();
             reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
+
+            // reservaties ophalen
         }
 
         private Klant klant;

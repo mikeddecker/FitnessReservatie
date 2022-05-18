@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomeinTest", "DomeinTest\Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatieUI", "FitnessReservatieUI\FitnessReservatieUI.csproj", "{A9BA344E-E324-49B3-A32A-D12F510CD46B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservatieDL", "FitnessReservatieDL\FitnessReservatieDL.csproj", "{861AC4B8-0202-4F03-B35F-2544BD4E1836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatieDL", "FitnessReservatieDL\FitnessReservatieDL.csproj", "{861AC4B8-0202-4F03-B35F-2544BD4E1836}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReservatieSchrijvenInDBTest", "ReservatieSchrijvenInDBTest\ReservatieSchrijvenInDBTest.csproj", "{58BDAC43-50A7-4107-B576-C44243B454B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,12 +37,17 @@ Global
 		{861AC4B8-0202-4F03-B35F-2544BD4E1836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{861AC4B8-0202-4F03-B35F-2544BD4E1836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{861AC4B8-0202-4F03-B35F-2544BD4E1836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BDAC43-50A7-4107-B576-C44243B454B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BDAC43-50A7-4107-B576-C44243B454B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BDAC43-50A7-4107-B576-C44243B454B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BDAC43-50A7-4107-B576-C44243B454B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A6914FAF-6372-4A6B-BD90-E7F6983BA6E3} = {5FC608DE-7BFD-47A7-AE2A-04B510FFD3A6}
+		{58BDAC43-50A7-4107-B576-C44243B454B8} = {5FC608DE-7BFD-47A7-AE2A-04B510FFD3A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3F8961B-440A-4750-A9CA-471192276104}

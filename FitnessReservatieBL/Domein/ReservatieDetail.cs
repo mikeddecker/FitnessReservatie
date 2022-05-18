@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public class ReservatieDetail {
+        public ReservatieDetail(DateTime datum, Tijdslot tijdslot, Toestel toestel) {
+            ZetDatum(datum);
+            ZetTijdslot(tijdslot);
+            ZetToestel(toestel);
+        }
+
         public DateTime Datum { get; private set; }
-        public int Tijdslot { get; private set; }
+        public Tijdslot Tijdslot { get; private set; }
         public Toestel Toestel { get; private set; }
 
         //public DateTime beginuur = new DateTime((long)10000 * 1000 * 60 * 60 * 8);
@@ -23,8 +29,8 @@ namespace FitnessReservatieBL.Domein {
             if (!t.Beschikbaar) { throw new ReservatieDetailException("ZetToestel - toestel is niet beschikbaar"); }
             Toestel = t;
         }
-        public void ZetTijdslot(int tijdslotID) { 
-            if (tijdslotID <= 0) { throw new ReservatieDetailException("ZetTijdslot - Ongeldige tijdslotID"); }
+        public void ZetTijdslot(Tijdslot tijdslotID) { 
+            if (tijdslotID.TijdslotID <= 0) { throw new ReservatieDetailException("ZetTijdslot - Ongeldige tijdslotID"); }
             Tijdslot = tijdslotID;
         }
 

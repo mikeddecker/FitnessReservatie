@@ -19,6 +19,7 @@ namespace FitnessReservatieBL.Domein {
         //public string AfbeeldingUrl { get; private set; }
         public void ZetId(int id) {
             if (id <= 0) { throw new ToestelException("ZetId - id moet groter zijn dan 0"); }
+            ToestelID = id;
         }
         public void ZetType(string toestelnaam) {
             if (string.IsNullOrWhiteSpace(toestelnaam)) { throw new ToestelException("ZetVoornaam"); }

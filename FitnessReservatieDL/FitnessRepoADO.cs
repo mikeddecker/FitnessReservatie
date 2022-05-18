@@ -55,7 +55,7 @@ namespace FitnessReservatieDL {
                 using (SqlCommand cmd = conn.CreateCommand()) {
                     conn.Open();
                     cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("verwijderd", false);
+                    cmd.Parameters.AddWithValue("@verwijderd", false);
 
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {

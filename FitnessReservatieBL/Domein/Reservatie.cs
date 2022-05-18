@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public class Reservatie {
+        public Reservatie(Klant klant) {
+            Klant = klant;
+            ReservatieDetails = new List<ReservatieDetail>();
+        }
+
         public int ReservatieID { get; private set; }
         public Klant Klant { get; private set; }
         public List<ReservatieDetail> ReservatieDetails { get; init; }
@@ -27,10 +32,20 @@ namespace FitnessReservatieBL.Domein {
 
             Klant = klant;
         }
+
         public void VoegReservatieDetailToe(ReservatieDetail detail) {
             if (detail == null) { throw new ReservatieException("VoegReservatieDetailToe - ReservatieDetails mogen niet leeg zijn"); }
             if (ReservatieDetails.Contains(detail)) { throw new ReservatieDetailException("VoegReservatieDetailToe - details zaten al in de reservatie"); }
             ReservatieDetails.Add(detail);
+        }
+
+        public override bool Equals(object obj) {
+            return obj is Reservatie reservatie &&
+                   ReservatieID == reservatie.ReservatieID;
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(ReservatieID);
         }
     }
 }
