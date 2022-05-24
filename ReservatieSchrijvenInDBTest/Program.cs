@@ -10,16 +10,18 @@ namespace ReservatieSchrijvenInDBTest {
         static void Main(string[] args) {
             Console.WriteLine("Hello World!");
             string connectionString = @"Data Source=LAPTOP-BFPIKR71\SQLEXPRESS;Initial Catalog=FitnessReservatie;Integrated Security=True";
-            IFitnessRepository fitnessRepo = new FitnessRepoADO(connectionString);
+            
             IPersoonRepository persoonRepo = new PersoonRepoADO(connectionString);
             IReservatieRepository reservatieRepo = new ReservatieRepoADO(connectionString);
-            FitnessManager fitnessManager = new FitnessManager(fitnessRepo);
+            
             PersoonManager persoonManager = new PersoonManager(persoonRepo);
             ReservatieManager reservatieManager = new ReservatieManager(reservatieRepo);
-            IReadOnlyList<Toestel> toestellen = fitnessManager.GeefToestellen();
-            IReadOnlyList<Tijdslot> tijdsloten = fitnessManager.GeefTijdsloten();
-            Toestel t5 = toestellen[4];
-            Toestel t4 = toestellen[3];
+
+            IReadOnlyList<Tijdslot> tijdsloten = reservatieManager.GeefTijdsloten();
+            Toestel t5 = new Toestel("toestel 5", true);
+            t5.ZetId(5);
+            Toestel t4 = new Toestel("toestel 4", true);
+            t4.ZetId(4);
             Tijdslot ts10 = tijdsloten[9];
             Tijdslot ts11 = tijdsloten[10];
             ReservatieDetail detail1 = new ReservatieDetail(new DateTime(2022, 05, 25), ts10, t5);

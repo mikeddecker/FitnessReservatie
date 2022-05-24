@@ -21,28 +21,27 @@ namespace FitnessReservatieUI {
     /// Interaction logic for KlantReserveertSessie.xaml
     /// </summary>
     public partial class KlantReserveertSessieWindow : Window {
-        public KlantReserveertSessieWindow(Klant klant, FitnessManager fitnessManager) {
+        public KlantReserveertSessieWindow(Klant klant) {
             InitializeComponent();
             this.klant = klant;
+            reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
+
 
             // velden invullen en constricties opleggen.
             ReservatieDatePicker.DisplayDateStart = DateTime.Today;
             ReservatieDatePicker.DisplayDateEnd = DateTime.Today.AddDays(7);
-            TijdslotComboBox.ItemsSource = fitnessManager.GeefTijdsloten();
+            TijdslotComboBox.ItemsSource = reservatieManager.GeefTijdsloten();
             ToestelComboBox.ItemsSource = new string[] { "eerst datum en tijd aub", "even geduld aub" };
 
             // mogelijke toestellen preparen om te vergelijken met huidige reservaties.
-            toestellen = fitnessManager.GeefToestellen();
-            reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
-
-            // reservaties ophalen
+            
+            // reservaties ophalen klant voor controles, spreiden van load.
         }
 
         private Klant klant;
         private ReservatieManager reservatieManager;
         private bool datumHasChanged = false;
         private bool tijdslotHasChanged = false;
-        private IReadOnlyList<Toestel> toestellen;
         private void ReservatieDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
             datumHasChanged = true;
             UpdateToestellen();
@@ -50,7 +49,7 @@ namespace FitnessReservatieUI {
         private void UpdateToestellen() {
             if (datumHasChanged && tijdslotHasChanged) {
                 ToestelComboBox.SelectedIndex++;
-
+                reservatieManager.GeefMogelijkeToestellen((DateTime)ReservatieDatePicker.SelectedDate, (Tijdslot)TijdslotComboBox.SelectedItem);
                 ToestelComboBox.IsEnabled = true;
             }
         }

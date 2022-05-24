@@ -10,12 +10,17 @@ using System.Threading.Tasks;
 namespace FitnessReservatieBL.Managers {
     public class ReservatieManager {
         private IReservatieRepository reservatieRepo;
+        private IReadOnlyList<Tijdslot> tijdsloten;
+
         public ReservatieManager(IReservatieRepository repository) {
             reservatieRepo = repository;
+            tijdsloten = reservatieRepo.GeefTijdsloten();
         }
-
-        public List<Reservatie> GeefReservaties() {
-            return reservatieRepo.GeefReservaties();
+        public List<Tijdslot> GeefTijdsloten() {
+            return reservatieRepo.GeefTijdsloten();
+        }
+        public List<Toestel> GeefMogelijkeToestellen(DateTime datum, Tijdslot tijdslot) {
+            return reservatieRepo.GeefMogelijkeToestellen(datum, tijdslot);
         }
         public Reservatie SchrijfReservatieInDB(Reservatie reservatie) {
             if (reservatie == null) { throw new ReservatieManagerException("SchrijfReservatieInDB - reservatie is null"); }

@@ -24,11 +24,9 @@ namespace FitnessReservatieUI {
     /// </summary>
     public partial class MainWindow : Window {
         private PersoonManager persoonManager;
-        public FitnessManager fitnessManager;
         public MainWindow() {
             InitializeComponent();
             persoonManager = new PersoonManager(new PersoonRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
-            fitnessManager = new FitnessManager(new FitnessRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
             LoginButton_Click(null, null);
         }
 
@@ -40,7 +38,7 @@ namespace FitnessReservatieUI {
                 EmailControle.ControleerEmail(email);
 
                 if (typeof(Klant) == persoon.GetType()) {
-                    KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon, fitnessManager);
+                    KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon);
                     klantReserveertSessieWindow.ShowDialog();
                 } else if (typeof(Admin) == persoon.GetType()) {
                     MessageBox.Show("Nog geen scherm voor Admin gemaakt");
