@@ -35,7 +35,7 @@ namespace FitnessReservatieUI {
             try {
                 string email = EmailTextBox.Text;
                 Persoon persoon = persoonManager.LogPersoonIn(email);
-                EmailControle.ControleerEmail(email);
+                EmailControle.ControleerEmail(email); // gooit exception als het niet oke is. Deze vangen we op en tonen we.
 
                 if (typeof(Klant) == persoon.GetType()) {
                     KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon);
@@ -43,6 +43,8 @@ namespace FitnessReservatieUI {
                 } else if (typeof(Admin) == persoon.GetType()) {
                     MessageBox.Show("Nog geen scherm voor Admin gemaakt");
                 }
+            } catch (EmailControleException ex) {
+                MessageBox.Show(ex.Message);
             } catch (Exception ex) {
                 MessageBox.Show(ex.Message);
             }
