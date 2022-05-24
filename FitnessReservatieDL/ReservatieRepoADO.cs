@@ -41,7 +41,7 @@ namespace FitnessReservatieDL {
                         Reservatie reservatie = new Reservatie(k);
                         reservatie.ZetReservatieID(reservatieID);
                         if (reservaties.Contains(reservatie)) {
-                            reservaties.;
+                            //reservaties;
                         }
                     }
                 }
@@ -52,7 +52,7 @@ namespace FitnessReservatieDL {
             finally {
                 conn.Close();
             }
-            return null;
+            //return null;
 
         }
         public Reservatie SchrijfReservatieInDB(Reservatie reservatie) {

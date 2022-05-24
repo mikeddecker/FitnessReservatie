@@ -18,16 +18,16 @@ namespace ReservatieSchrijvenInDBTest {
             ReservatieManager reservatieManager = new ReservatieManager(reservatieRepo);
             IReadOnlyList<Toestel> toestellen = fitnessManager.GeefToestellen();
             IReadOnlyList<Tijdslot> tijdsloten = fitnessManager.GeefTijdsloten();
-            Toestel t3 = toestellen[2];
+            Toestel t5 = toestellen[4];
             Toestel t4 = toestellen[3];
             Tijdslot ts10 = tijdsloten[9];
             Tijdslot ts11 = tijdsloten[10];
-            ReservatieDetail detail1 = new ReservatieDetail(new DateTime(2022, 05, 18), ts10, t3);
-            ReservatieDetail detail2 = new ReservatieDetail(new DateTime(2022, 05, 18), ts11, t4);
+            ReservatieDetail detail1 = new ReservatieDetail(new DateTime(2022, 05, 25), ts10, t5);
+            ReservatieDetail detail2 = new ReservatieDetail(new DateTime(2022, 05, 25), ts11, t4);
             Klant k = (Klant)persoonManager.LogPersoonIn("mike.dedecker@student.hogent.be");
             Reservatie reservatie = new Reservatie(k);
             reservatie.VoegReservatieDetailToe(detail1);
-            //reservatie.VoegReservatieDetailToe(detail2);
+            reservatie.VoegReservatieDetailToe(detail2);
             reservatieManager.SchrijfReservatieInDB(reservatie);
         }
     }
