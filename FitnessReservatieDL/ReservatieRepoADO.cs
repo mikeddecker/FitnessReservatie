@@ -47,6 +47,9 @@ namespace FitnessReservatieDL {
             }
         }
 
+        public List<ReservatieDetail> GeefToekomstigeReservatieDetais(int klantnummer) {
+
+        }
         public Reservatie SchrijfReservatieInDB(Reservatie reservatie) {
             SqlConnection conn = GetConnection();
             string queryReservatie = "INSERT INTO dbo.Reservatie(klantnummer) "

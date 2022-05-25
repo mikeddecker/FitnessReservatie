@@ -12,6 +12,7 @@ namespace FitnessReservatieBL.Managers {
         private IReservatieRepository reservatieRepo;
         private IReadOnlyList<Tijdslot> tijdsloten;
         private Klant klant;
+        private List<Reservatie> toekomstigeReservatiesKlant;
 
         public ReservatieManager(IReservatieRepository repository, Klant klant) {
             reservatieRepo = repository;

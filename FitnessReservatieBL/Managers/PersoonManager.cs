@@ -22,7 +22,7 @@ namespace FitnessReservatieBL.Managers {
 
                 //Nu is de mail toch al enigszins een deftige format.
                 if (Repository.BestaatPersoon(email)) {
-                    return Repository.SelecteerPersoon(email);
+                    return Repository.SelecteerPersoon(email, null);
                 } else {
                     throw new PersoonManagerException("LogPersoonIn - Wij kennen dit emailadres niet.");
                 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FitnessReservatieBL.Domein {
     public class Reservatie {
         public Reservatie(Klant klant) {
-            Klant = klant;
+            ZetKlant(klant);
             ReservatieDetails = new List<ReservatieDetail>();
         }
 
