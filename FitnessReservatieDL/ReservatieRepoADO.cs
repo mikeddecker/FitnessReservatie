@@ -22,21 +22,25 @@ namespace FitnessReservatieDL {
 
         public List<Toestel> GeefMogelijkeToestellen(DateTime datum, Tijdslot tijdslot) {
             SqlConnection conn = GetConnection();
-            string query = "SELECT id, toestel FROM dbo.Toestel WHERE verwijderd ='False' AND beschikbaar = 'True' AND id NOT IN (SELECT toestelID FROM dbo.ReservatieDetail WHERE (datum='2022-05-25' AND tijdslotID=11));";
+            string query = "SELECT id, toestel FROM dbo.Toestel WHERE verwijderd ='False' AND beschikbaar = 'True' AND id NOT IN (SELECT toestelID FROM dbo.ReservatieDetail WHERE (datum=@datum AND tijdslotID=@tijdslotID));";
 
             List<Toestel> toestellen = new List<Toestel>();
             conn.Open();
             try {
                 using (SqlCommand cmd = conn.CreateCommand()) {
                     cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@datum", datum);
+                    cmd.Parameters.AddWithValue("@tijdslotID", tijdslot.TijdslotID);
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read()) {
-
+                        Toestel t = new Toestel((string)reader["toestel"], true);
+                        t.ZetId((int)reader["id"]);
+                        toestellen.Add(t);
                     }
                 }
                 return toestellen;
             } catch (Exception ex) {
-                throw new ReservatieRepoADOException("GeefReservaties", ex);
+                throw new ReservatieRepoADOException("GeefMogelijkeToestellen", ex);
             }
             finally {
                 conn.Close();
@@ -112,31 +116,5 @@ namespace FitnessReservatieDL {
             }
         }
 
-        public List<Toestel> GeefToestellen() {
-            SqlConnection conn = GetConnection();
-            string query = "SELECT * FROM dbo.Toestel WHERE verwijderd=@verwijderd;";
-            try {
-                List<Toestel> toestellen = new List<Toestel>();
-                using (SqlCommand cmd = conn.CreateCommand()) {
-                    conn.Open();
-                    cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@verwijderd", false);
-
-                    IDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read()) {
-                        Toestel t = new Toestel((string)reader["toestel"], (bool)reader["beschikbaar"]);
-                        t.ZetId((int)reader["id"]);
-                        toestellen.Add(t);
-                    }
-                }
-                return toestellen;
-
-            } catch (Exception ex) {
-                throw new ReservatieRepoADOException("GeefToestellen", ex);
-            }
-            finally {
-                conn.Close();
-            }
-        }
     }
 }

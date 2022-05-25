@@ -29,13 +29,13 @@
         <TextBlock Grid.Row="1" Grid.Column="4" Text="Reservatiedetails" FontSize="16" Margin="5,5,5,5" VerticalAlignment="Bottom"/>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="Datum" FontSize="20" Margin="5,5,5,5"/>
         <DatePicker Grid.Row="2" Grid.Column="2" Name="ReservatieDatePicker" Margin="5,5,5,5" FirstDayOfWeek="Monday" SelectedDateChanged="ReservatieDatePicker_SelectedDateChanged"/>
-        <ListBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+        <ListBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="3" Name="ReservatieDetailListBox"/>
         <TextBlock Grid.Row="3" Grid.Column="1" Text="Tijdslot" FontSize="20" Margin="5,5,5,5"/>
         <ComboBox Grid.Row="3" Grid.Column="2" Name="TijdslotComboBox" Margin="5,5,5,5" SelectionChanged="TijdslotComboBox_SelectionChanged"/>
         <TextBlock Grid.Row="4" Grid.Column="1" Text="Toestel" FontSize="20" Margin="5,5,5,5"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" Name="ToestelComboBox" Margin="5,5,5,5" SelectedIndex="0" IsEnabled="False"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" Name="ToestelComboBox" Margin="5,5,5,5" SelectedIndex="0" IsEnabled="False" SelectionChanged="ToestelComboBox_SelectionChanged"/>
         
-        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Name="VoegToeButton" Content="VoegToe" Margin="5,5,5,5"/>
-        <Button Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Name="ReserveerButton" Content="Reserveer" Margin="5,5,5,5"/>
+        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Name="VoegToeButton" Content="VoegToe" IsEnabled="False" Margin="5,5,5,5" Click="VoegToeButton_Click"/>
+        <Button Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Name="ReserveerButton" Content="Reserveer" IsEnabled="False" Margin="5,5,5,5" Click="ReserveerButton_Click"/>
     </Grid>
 </Window>

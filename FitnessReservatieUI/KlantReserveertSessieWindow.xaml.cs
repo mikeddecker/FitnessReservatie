@@ -23,8 +23,8 @@ namespace FitnessReservatieUI {
     public partial class KlantReserveertSessieWindow : Window {
         public KlantReserveertSessieWindow(Klant klant) {
             InitializeComponent();
-            this.klant = klant;
-            reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
+            //this.klant = klant;
+            reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()), klant);
 
 
             // velden invullen en constricties opleggen.
@@ -34,22 +34,29 @@ namespace FitnessReservatieUI {
             ToestelComboBox.ItemsSource = new string[] { "eerst datum en tijd aub", "even geduld aub" };
 
             // mogelijke toestellen preparen om te vergelijken met huidige reservaties.
-            
+
             // reservaties ophalen klant voor controles, spreiden van load.
         }
 
-        private Klant klant;
+        //private Klant klant;
         private ReservatieManager reservatieManager;
         private bool datumHasChanged = false;
         private bool tijdslotHasChanged = false;
+        private Reservatie reservatie;
         private void ReservatieDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
             datumHasChanged = true;
             UpdateToestellen();
         }
         private void UpdateToestellen() {
-            if (datumHasChanged && tijdslotHasChanged) {
-                ToestelComboBox.SelectedIndex++;
-                reservatieManager.GeefMogelijkeToestellen((DateTime)ReservatieDatePicker.SelectedDate, (Tijdslot)TijdslotComboBox.SelectedItem);
+            if (ToestelComboBox.IsEnabled) { // in het geval dat we na een toestel te kiezen nog een andere datum of tijdslot kiezen, 
+                // controleren of het toestel nog mogelijk is.
+                List<Toestel> toestellen = reservatieManager.GeefMogelijkeToestellen((DateTime)ReservatieDatePicker.SelectedDate, (Tijdslot)TijdslotComboBox.SelectedItem);
+                Toestel geselecteerdeToestel = (Toestel)ToestelComboBox.SelectedItem;
+                if (!toestellen.Contains(geselecteerdeToestel)) {
+                    ToestelComboBox.ItemsSource = toestellen;
+                }
+            } else if (datumHasChanged && tijdslotHasChanged) {
+                ToestelComboBox.ItemsSource = reservatieManager.GeefMogelijkeToestellen((DateTime)ReservatieDatePicker.SelectedDate, (Tijdslot)TijdslotComboBox.SelectedItem);
                 ToestelComboBox.IsEnabled = true;
             }
         }
@@ -57,6 +64,26 @@ namespace FitnessReservatieUI {
         private void TijdslotComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             tijdslotHasChanged = true;
             UpdateToestellen();
+
+        }
+
+        private void ToestelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            VoegToeButton.IsEnabled = true;
+        }
+
+        private void VoegToeButton_Click(object sender, RoutedEventArgs e) {
+            ReservatieDetail detail = new ReservatieDetail((DateTime)ReservatieDatePicker.SelectedDate, (Tijdslot)TijdslotComboBox.SelectedItem, (Toestel)ToestelComboBox.SelectedItem);
+            reservatie.VoegReservatieDetailToe(detail);
+            reservatieManager.MagKlantTijdslotReserveren(reservatie);
+        }
+
+        private void ReserveerButton_Click(object sender, RoutedEventArgs e) {
+            reservatieManager.SchrijfReservatieInDB(reservatie);
+            ReservatieDetailListBox.ItemsSource = "";
+            ReservatieDatePicker.SelectedDate = null;
+            ToestelComboBox.ItemsSource = new string[] { "eerst datum en tijd aub", "even geduld aub" };
+            datumHasChanged = false;
+            tijdslotHasChanged = false;
         }
     }
 }

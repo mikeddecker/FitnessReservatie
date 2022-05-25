@@ -37,7 +37,7 @@ namespace FitnessReservatieUI {
                 Persoon persoon = persoonManager.LogPersoonIn(email);
                 EmailControle.ControleerEmail(email); // gooit exception als het niet oke is. Deze vangen we op en tonen we.
 
-                if (typeof(Klant) == persoon.GetType()) {
+                if (typeof(Klant) == persoon.GetType()) {                  
                     KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon);
                     klantReserveertSessieWindow.ShowDialog();
                 } else if (typeof(Admin) == persoon.GetType()) {
