@@ -41,7 +41,8 @@ namespace FitnessReservatieUI {
                     KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon);
                     klantReserveertSessieWindow.ShowDialog();
                 } else if (typeof(Admin) == persoon.GetType()) {
-                    MessageBox.Show("Nog geen scherm voor Admin gemaakt");
+                    AdminOverzichtWindow adminOverzichtWindow = new AdminOverzichtWindow();
+                    adminOverzichtWindow.ShowDialog();
                 }
             } catch (EmailControleException ex) {
                 MessageBox.Show(ex.Message);
