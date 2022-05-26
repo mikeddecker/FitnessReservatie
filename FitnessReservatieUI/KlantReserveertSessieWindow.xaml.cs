@@ -38,6 +38,7 @@ namespace FitnessReservatieUI {
         private bool tijdslotHasChanged = false;
 
         private void ReservatieDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
+            // TODO if (today && tijdslotHasChanged) { controlleer tijdsloten }
             datumHasChanged = true;
             if (tijdslotHasChanged) {
                 UpdateToestellen();
@@ -66,6 +67,7 @@ namespace FitnessReservatieUI {
         }
 
         private void ToestelComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            // TODO if (datumHasChanged && datum today) { controlleer tijdsloten }
             VoegToeButton.IsEnabled = true;
         }
 
