@@ -22,7 +22,8 @@ namespace FitnessReservatieUI {
         }
 
         private void ToestelToevoegenButton_Click(object sender, RoutedEventArgs e) {
-
+            ToestelToevoegenWindow toestelToevoegenWindow = new ToestelToevoegenWindow();
+            toestelToevoegenWindow.ShowDialog();
         }
 
         private void ToestelVerwijderenButton_Click(object sender, RoutedEventArgs e) {

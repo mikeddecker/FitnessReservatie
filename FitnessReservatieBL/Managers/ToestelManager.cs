@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace FitnessReservatieBL.Managers {
     public class ToestelManager {
         private IToestelRepository toestelRepo;
-        private Dictionary<int, Toestel> toestellen; /* toestelID, toestel : die gelijdelijk aan gevuld wordt, ofwel in een keer gevuld.
+        private Dictionary<int, Toestel> toestellen = new Dictionary<int, Toestel>(); /* toestelID, toestel : die gelijdelijk aan gevuld wordt, ofwel in een keer gevuld.
                                                       * Bij reservaties, worden enkel de nodige toestellen ingeladen */
         
 

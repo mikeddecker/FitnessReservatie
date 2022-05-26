@@ -24,6 +24,7 @@ namespace FitnessReservatieUI {
     /// </summary>
     public partial class MainWindow : Window {
         private PersoonManager persoonManager;
+        
         public MainWindow() {
             InitializeComponent();
             persoonManager = new PersoonManager(new PersoonRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));

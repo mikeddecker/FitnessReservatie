@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Toestel toevoegen" Margin="5,5,5,5" VerticalAlignment="Center" FontSize="20"/>
         <Label Grid.Row="1" Grid.Column="0"  Content="Toestelnaam" Margin="5,5,5,5"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="ToestelnaamLabel" Margin="5,5,5,5"/>
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="voeg toe" Margin="5,5,5,5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="ToestelNaamTextBox" Margin="5,5,5,5"/>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="voeg toe" Margin="5,5,5,5" Click="Button_Click"/>
     </Grid>
 </Window>
