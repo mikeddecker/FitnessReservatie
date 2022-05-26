@@ -62,7 +62,7 @@ namespace FitnessReservatieBL.Managers {
                     tweeTijdslotenVoorNieuweReservatieIsAanwezig = true;
                 } else if (einduurVanReedsGereserveerd.Add(new TimeSpan(-1, 0, 0)) == nieuwDetail.Tijdslot.Einduur) {
                     eenTijdslotNaNieuweReservatieIsAanwezig = true;
-                } else if (einduurVanReedsGereserveerd == nieuwDetail.Tijdslot.Einduur) {
+                } else if (einduurVanReedsGereserveerd.Add(new TimeSpan(-2,0,0)) == nieuwDetail.Tijdslot.Einduur) {
                     tweeTijdslotenNaNieuweReservatieIsAanwezig = true;
                 }
             }

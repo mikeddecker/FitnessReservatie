@@ -77,6 +77,7 @@ namespace FitnessReservatieUI {
                 ResetDetails();
                 UpdateReservatieDetailsListBox();
                 ReserveerButton.IsEnabled = true;
+                VoegToeButton.IsEnabled = false;
             } else {
                 MessageBox.Show("Vergeet niet:\n " +
                     "--Je mag slechts 4 reservaties per dag hebben\n " +
@@ -92,6 +93,8 @@ namespace FitnessReservatieUI {
             tijdslotHasChanged = false;
             ReservatieDatePicker.SelectedDate = null;
             datumHasChanged = false;
+            TijdslotComboBox.SelectedIndex = -1;
+            tijdslotHasChanged = false;
             ToestelComboBox.ItemsSource = "";
         }
 
