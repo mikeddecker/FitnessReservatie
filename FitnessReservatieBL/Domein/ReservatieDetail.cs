@@ -11,11 +11,13 @@ namespace FitnessReservatieBL.Domein {
             ZetDatum(datum);
             ZetTijdslot(tijdslot);
             ZetToestel(toestel);
+            IsNieuw = false;
         }
 
         public DateTime Datum { get; private set; }
         public Tijdslot Tijdslot { get; private set; }
         public Toestel Toestel { get; private set; }
+        public bool IsNieuw { get; private set; }
 
         //public DateTime beginuur = new DateTime((long)10000 * 1000 * 60 * 60 * 8);
 
@@ -29,20 +31,30 @@ namespace FitnessReservatieBL.Domein {
             if (!t.Beschikbaar) { throw new ReservatieDetailException("ZetToestel - toestel is niet beschikbaar"); }
             Toestel = t;
         }
-        public void ZetTijdslot(Tijdslot tijdslotID) { 
+        public void ZetTijdslot(Tijdslot tijdslotID) {
             if (tijdslotID.TijdslotID <= 0) { throw new ReservatieDetailException("ZetTijdslot - Ongeldige tijdslotID"); }
             Tijdslot = tijdslotID;
         }
 
+        public void ZetIsNieuw(bool isNieuw) {
+            IsNieuw = isNieuw;
+        }
+
         public override bool Equals(object obj) {
             return obj is ReservatieDetail detail &&
-                   Datum == detail.Datum &&
-                   Tijdslot == detail.Tijdslot &&
-                   EqualityComparer<Toestel>.Default.Equals(Toestel, detail.Toestel);
+                   Datum.ToShortDateString() == detail.Datum.ToShortDateString() &&
+                   Tijdslot.Equals(detail.Tijdslot) &&
+                   Toestel.Equals(detail.Toestel);
         }
 
         public override int GetHashCode() {
             return HashCode.Combine(Datum, Tijdslot, Toestel);
+        }
+
+        public override string ToString() {
+            string details = $"{Datum.ToShortDateString()} : {Tijdslot.Beginuur}-{Tijdslot.Einduur} {Toestel.Type} {Toestel.ToestelID}";
+            if (IsNieuw) { details += " (nieuw)"; }
+            return details;
         }
     }
 }

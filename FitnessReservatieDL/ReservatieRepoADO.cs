@@ -48,9 +48,41 @@ namespace FitnessReservatieDL {
         }
 
         public List<ReservatieDetail> GeefToekomstigeReservatieDetais(int klantnummer) {
+            SqlConnection conn = GetConnection();
+            string query = "SELECT d.*,t.toestel,tt.Beginuur,tt.Einduur " +
+                "FROM ReservatieDetail d " +
+                "LEFT JOIN Reservatie r ON d.reservatieID=r.id " +
+                "LEFT JOIN Toestel t ON t.id=d.toestelID " +
+                "LEFT JOIN Tijdslot tt ON tt.ID=d.tijdslotID  " +
+                "LEFT JOIN Klant k ON k.id = r.klantnummer " +
+                "WHERE r.klantnummer=@klantnummer AND DATEADD(DAY, -1, GETDATE())<d.datum";
+            List<ReservatieDetail> details = new List<ReservatieDetail>();
+            try {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand()) {
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@klantnummer", klantnummer);
+
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        DateTime datum = (DateTime)reader["datum"];
+                        Tijdslot tijdslot = new Tijdslot((int)reader["tijdslotID"], (TimeSpan)reader["Beginuur"], (TimeSpan)reader["Einduur"]);
+                        Toestel toestel = new Toestel((string)reader["toestel"], true);
+                        toestel.ZetId((int)reader["toestelID"]);
+                        ReservatieDetail detail = new ReservatieDetail(datum, tijdslot, toestel);
+                        details.Add(detail);
+                    }
+                }
+                return details;
+            } catch (Exception ex) {
+                throw new ReservatieRepoADOException("GeefToekomstigeReservatieDetails", ex);
+            }
+            finally {
+                conn.Close();
+            }
 
         }
-        public Reservatie SchrijfReservatieInDB(Reservatie reservatie) {
+        public void SchrijfReservatieInDB(Reservatie reservatie) {
             SqlConnection conn = GetConnection();
             string queryReservatie = "INSERT INTO dbo.Reservatie(klantnummer) "
                 + "output INSERTED.ID VALUES(@klantnummer);";
@@ -80,7 +112,6 @@ namespace FitnessReservatieDL {
                     }
 
                     tran.Commit();
-                    return reservatie;
                 }
 
             } catch (Exception ex) {

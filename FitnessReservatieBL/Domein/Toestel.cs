@@ -32,11 +32,15 @@ namespace FitnessReservatieBL.Domein {
 
         public override bool Equals(object obj) { // toestel is hetzelfde op basis van ID
             return obj is Toestel toestel &&
-                   ToestelID == toestel.ToestelID;
+                   this.ToestelID == toestel.ToestelID;
         }
 
         public override int GetHashCode() {
             return HashCode.Combine(ToestelID);
+        }
+
+        public override string ToString() {
+            return $"ID: {ToestelID} - {Type}";
         }
     }
 }
