@@ -29,6 +29,7 @@ namespace FitnessReservatieBL.Managers {
         }
         public List<Toestel> GeefMogelijkeToestellen(DateTime datum, Tijdslot tijdslot) {
             //TODO controlleren met klant of er geen 2 toestellen na elkaar zijn en niet meer dan 4 reservaties op een dag
+            //TODO verplaats method
             return reservatieRepo.GeefMogelijkeToestellen(datum, tijdslot);
         }
         public bool MagKlantTijdslotReserveren(ReservatieDetail detail) {

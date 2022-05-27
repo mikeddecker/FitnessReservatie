@@ -11,5 +11,7 @@ namespace FitnessReservatieBL.Interfaces {
         void UpdateToestelBeschikbaarheid(int toestelID, bool beschikbaar);
         bool HeeftToestelToekomstigeReservaties(int toestelID);
         int SchrijfToestelInDB(Toestel nieuwToestel);
+        Dictionary<int, Toestel> GeefBeschikbareToestellen();
+        List<int> GeefToestelIDsZonderOpenstaandeReservaties(string zoektekst);
     }
 }

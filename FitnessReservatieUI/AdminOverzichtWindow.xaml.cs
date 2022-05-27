@@ -1,5 +1,8 @@
-﻿using System;
+﻿using FitnessReservatieBL.Managers;
+using FitnessReservatieDL;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,21 +20,25 @@ namespace FitnessReservatieUI {
     /// Interaction logic for AdminOverzichtWindow.xaml
     /// </summary>
     public partial class AdminOverzichtWindow : Window {
+        private ToestelManager toestelManager;
         public AdminOverzichtWindow() {
             InitializeComponent();
+            toestelManager = new ToestelManager(new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
         }
 
         private void ToestelToevoegenButton_Click(object sender, RoutedEventArgs e) {
-            ToestelToevoegenWindow toestelToevoegenWindow = new ToestelToevoegenWindow();
+            ToestelToevoegenWindow toestelToevoegenWindow = new ToestelToevoegenWindow(toestelManager);
             toestelToevoegenWindow.ShowDialog();
         }
 
         private void ToestelVerwijderenButton_Click(object sender, RoutedEventArgs e) {
-
+            ToestelVerwijderenWindow toestelVerwijderenWindow = new ToestelVerwijderenWindow(toestelManager);
+            toestelVerwijderenWindow.ShowDialog();
         }
 
         private void ToestelInOnderhoudButton_Click(object sender, RoutedEventArgs e) {
-
+            ToestelInOnderhoudZettenWindow toestelInOnderhoudZettenWindow = new ToestelInOnderhoudZettenWindow(toestelManager);
+            toestelInOnderhoudZettenWindow.ShowDialog();
         }
 
         private void LogOutButton_Click(object sender, RoutedEventArgs e) {

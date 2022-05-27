@@ -3,6 +3,7 @@ using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,26 @@ namespace FitnessReservatieDL {
         }
         private SqlConnection GetConnection() {
             return new SqlConnection(connectieString);
+        }
+        public Dictionary<int, Toestel> GeefBeschikbareToestellen() {
+            SqlConnection conn = GetConnection();
+            string query = "SELECT id, toestel, beschikbaar FROM dbo.Toestel WHERE verwijderd='false';";
+            try {
+                conn.Open();
+                Dictionary<int, Toestel> toestellen = new Dictionary<int, Toestel>();
+                using (SqlCommand cmd = conn.CreateCommand()) {
+                    cmd.CommandText = query;
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        Toestel t = new Toestel((string)reader["toestel"], (bool)reader["beschikbaar"]);
+                        t.ZetId((int)reader["id"]);
+                        toestellen.Add(t.ToestelID, t);
+                    }
+                }
+                return toestellen;
+            } catch (Exception ex) {
+                throw new ToestelRepoADOException("GeefAlleToestellen", ex);
+            }
         }
         public bool HeeftToestelToekomstigeReservaties(int toestelID) {
             SqlConnection conn = GetConnection();
@@ -78,7 +99,7 @@ namespace FitnessReservatieDL {
         }
         public void VerwijderToestel(int toestelID) {
             SqlConnection conn = GetConnection();
-            string query = "UPDATE dbo.Toestel SET verwijderd='true' WHERE id=@id";
+            string query = "UPDATE dbo.Toestel SET verwijderd='true', beschikbaar='false' WHERE id=@id";
             try {
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand()) {
@@ -89,8 +110,36 @@ namespace FitnessReservatieDL {
             } catch (Exception ex) {
                 throw new ToestelRepoADOException("VerwijderToestel", ex);
             }
-            throw new NotImplementedException();
+            finally {
+                conn.Close();
+            }
         }
 
+        public List<int> GeefToestelIDsZonderOpenstaandeReservaties(string zoektekst) {
+            SqlConnection conn = GetConnection();
+            string query = "SELECT id FROM dbo.Toestel t " +
+                "WHERE verwijderd='false' AND toestel=@toestelnaam AND t.id NOT IN " +
+                    "(SELECT DISTINCT r.toestelID FROM dbo.ReservatieDetail r " +
+                    "LEFT JOIN dbo.Tijdslot t ON t.ID=r.tijdslotID " +
+                    "WHERE GETDATE()<(CAST(r.datum AS datetime) + CAST(t.Beginuur AS datetime)))";
+            try {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand()) {
+                    cmd.CommandText = query;
+                    cmd.Parameters.AddWithValue("@toestelnaam", zoektekst);
+
+                    List<int> toestelIDs = new List<int>();
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read()) {
+                        toestelIDs.Add((int)reader["id"]);
+                    }
+                    return toestelIDs;
+                }
+            } catch (Exception ex) {
+                throw new ToestelRepoADOException("GeefToestelIDsZonderOpenstaandeReservaties", ex);
+            } finally {
+                conn.Close();
+            }
+        }
     }
 }

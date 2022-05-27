@@ -1,0 +1,17 @@
+﻿<Window x:Class="FitnessReservatieUI.SelecteerToestelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessReservatieUI"
+        mc:Ignorable="d"
+        Title="Selecteer toestel" Height="300" Width="200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" Name="ToestelListBox" Margin="5,5,5,5" SelectionChanged="ToestelListBox_SelectionChanged"/>
+        <Button Grid.Row="1" Name="SelecteerToestelButton" Content="Selecteer toestel" Margin="5,5,5,5" IsEnabled="False" Click="SelecteerToestelButton_Click"/>
+    </Grid>
+</Window>

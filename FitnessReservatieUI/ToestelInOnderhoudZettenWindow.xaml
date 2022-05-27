@@ -1,0 +1,32 @@
+﻿<Window x:Class="FitnessReservatieUI.ToestelInOnderhoudZettenWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessReservatieUI"
+        mc:Ignorable="d"
+        Title="Toestel updaten" Height="300" Width="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="Zet toestel in onderhoud" Margin="5,5,5,5" VerticalAlignment="Center" FontSize="20"/>
+        <Label Grid.Row="1" Grid.Column="0"  Content="ID" Margin="5,5,5,5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Name="IDTextBox" Margin="5,5,5,5" IsEnabled="True" TextChanged="IDTextBox_TextChanged" InputScope="Number"/>
+        <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Name="ZoekButton" Content="Zoek" Margin="5,5,5,5" IsEnabled="False" Click="ZoekButton_Click"/>
+        <Label Grid.Row="2" Grid.Column="0"  Content="Toestelnaam" Margin="5,5,5,5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Name="ToestelnaamTextBox" Margin="5,5,5,5" IsEnabled="True" TextChanged="ToestelnaamTextBox_TextChanged"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Toestelinfo:" Margin="5,5,5,5"/>
+        <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Name="ToestelInfoLabel" Margin="5,5,5,5"/>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Name="UpdateButton" Content="update" Margin="5,5,5,5" IsEnabled="false" Click="UpdateToestelButton_Click"/>
+    </Grid>
+</Window>

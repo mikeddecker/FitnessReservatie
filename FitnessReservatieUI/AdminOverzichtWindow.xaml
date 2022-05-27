@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservatieUI"
         mc:Ignorable="d"
-        Title="AdminOverzichtWindow" Height="450" Width="800">
+        Title="Overzicht" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Name="ToestelToevoegenButton" Content="Toestel toevoegen" Margin="30,20,30,10" Click="ToestelToevoegenButton_Click"/>
         <Button Grid.Row="1" Name="ToestelVerwijderenButton" Content="Toestel verwijderen" Margin="30,10,30,10" Click="ToestelVerwijderenButton_Click"/>
-        <Button Grid.Row="2" Name="ToestelInOnderhoudButton" Content="Toestel in onderhoud plaatsen" Margin="30,10,30,10" Click="ToestelInOnderhoudButton_Click"/>
+        <Button Grid.Row="2" Name="ToestelInOnderhoudButton" Content="Toestel in onderhoud plaatsen door defect" Margin="30,10,30,10" Click="ToestelInOnderhoudButton_Click"/>
         <Button Grid.Row="3" Name="LogOutButton" Content="Log out" Margin="30,10,30,20" Click="LogOutButton_Click"/>
     </Grid>
 </Window>

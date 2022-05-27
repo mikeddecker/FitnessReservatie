@@ -22,9 +22,9 @@ namespace FitnessReservatieUI {
     /// </summary>
     public partial class ToestelToevoegenWindow : Window {
         private ToestelManager toestelManager;
-        public ToestelToevoegenWindow() {
+        public ToestelToevoegenWindow(ToestelManager toestelManager) {
             InitializeComponent();
-            toestelManager = new ToestelManager(new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
+            this.toestelManager = toestelManager;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
