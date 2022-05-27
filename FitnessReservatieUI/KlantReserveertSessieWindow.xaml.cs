@@ -38,7 +38,7 @@ namespace FitnessReservatieUI {
         private bool tijdslotHasChanged = false;
 
         private void ReservatieDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e) {
-            // TODO if (today && tijdslotHasChanged) { controlleer tijdsloten }
+            // TODO if (today && tijdslotHasChanged) { controlleer tijdsloten, enkel reserveren vandaag NA dit uur }
             datumHasChanged = true;
             if (tijdslotHasChanged) {
                 UpdateToestellen();

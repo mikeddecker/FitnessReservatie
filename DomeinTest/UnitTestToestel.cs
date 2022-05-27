@@ -40,7 +40,7 @@ namespace DomeinTest {
         //public void ZetAfbeeldingUrl_valid(string urlIn, string urlUit) {
         //    // in feite: Path.Exists
         //    //Assert.True(Path.Exists(urlIn));
-        //    // TODO
+        //    // TODO eventueel afbeeldingen toevoegen
         //    Toestel toestel = new Toestel("Fiets", "images/url1");
         //    Assert.Equal("images/url1", toestel.AfbeeldingUrl);
         //    toestel.ZetAfbeeldingUrl(urlIn);
