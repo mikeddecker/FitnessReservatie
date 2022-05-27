@@ -28,7 +28,7 @@ namespace FitnessReservatieUI {
         public MainWindow() {
             InitializeComponent();
             persoonManager = new PersoonManager(new PersoonRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
-            
+            //TODO inloggen met ID
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
