@@ -62,7 +62,7 @@ namespace FitnessReservatieBL.Managers {
                     tweeTijdslotenVoorNieuweReservatieIsAanwezig = true;
                 } else if (einduurVanReedsGereserveerd.Add(new TimeSpan(-1, 0, 0)) == nieuwDetail.Tijdslot.Einduur) {
                     eenTijdslotNaNieuweReservatieIsAanwezig = true;
-                } else if (einduurVanReedsGereserveerd.Add(new TimeSpan(-2,0,0)) == nieuwDetail.Tijdslot.Einduur) {
+                } else if (einduurVanReedsGereserveerd.Add(new TimeSpan(-2, 0, 0)) == nieuwDetail.Tijdslot.Einduur) {
                     tweeTijdslotenNaNieuweReservatieIsAanwezig = true;
                 }
             }
@@ -82,21 +82,13 @@ namespace FitnessReservatieBL.Managers {
                 Console.WriteLine("stop");
             }
             return rr;
-            
+
         }
         private bool MinderDan4ReservatiesOpDag(List<ReservatieDetail> alleDetails, ReservatieDetail detail) {
-            bool r = 4 > alleDetails.Where(d => d.Datum == detail.Datum).Count();
-            if (!r) {
-                Console.WriteLine(""); //TODO
-            }
-            return r;
+            return 4 > alleDetails.Where(d => d.Datum == detail.Datum).Count();
         }
         private bool IsVrijTijdslotVoorKlant(List<ReservatieDetail> alleDetails, ReservatieDetail detail) {
-            bool r = !(alleDetails.Where(d => d.Tijdslot == detail.Tijdslot && d.Datum == detail.Datum).Count() > 0);
-            if (!r) {
-                Console.WriteLine(""); //TODO
-            }
-            return r;
+            return !(alleDetails.Where(d => d.Tijdslot == detail.Tijdslot && d.Datum == detail.Datum).Count() > 0);
         }
         public void SchrijfReservatieInDB() {
             Reservatie reservatie = new Reservatie(klant);
