@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace FitnessReservatieBL.Domein {
     public class EmailControle {
         public static bool ControleerEmail(string email) {
+            email = email.ToLower();
             if (string.IsNullOrWhiteSpace(email)) { throw new EmailControleException("ZetEmail - null or white space"); }
             if (!email.Contains("@")) { throw new EmailControleException("ZetEmail - Email bevat geen @"); }
             if (email.StartsWith("@")) { throw new EmailControleException("ZetEmail - Email start met @"); }

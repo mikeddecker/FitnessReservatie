@@ -9,14 +9,37 @@ using Xunit;
 
 namespace DomeinTest {
     public class UnitTestToestel {
+        [Fact]
+        public void ZetId_valid() {
+            Toestel t = new Toestel("fiets", true);
+            t.ZetId(3);
+            Assert.Equal(3, t.ToestelID);
+        }
+
         [Theory]
-        [InlineData("Loopband", "Loopband")]
-        [InlineData("Loopband     ", "Loopband")]
-        [InlineData("Loopband ", "Loopband")]
-        [InlineData("     Loopband", "Loopband")]
+        [InlineData(-3)]
+        [InlineData(0)]
+        public void ZetId_invalid(int id) {
+            Toestel t  = new Toestel("fiets", true);
+            Assert.Throws<ToestelException>(() => t.ZetId(id));
+        }
+        [Theory]
+        [InlineData(true, true)]
+        [InlineData(false, false)]
+        public void ZetBeschikbaarheid_valid(bool isBeschikbaarIn, bool isBeschikbaarUit) {
+            Toestel k = new Toestel("fiets", !isBeschikbaarIn);
+            k.ZetBeschikbaarheid(isBeschikbaarIn);
+            Assert.True(k.Beschikbaar == isBeschikbaarUit);
+        }
+        [Theory]
+        [InlineData("loopband", "loopband")]
+        [InlineData("Loopband", "loopband")]
+        [InlineData("loopband     ", "loopband")]
+        [InlineData("loopband ", "loopband")]
+        [InlineData("     Loopband", "loopband")]
         public void ZetToestelnaam_valid(string naamIn, string naamUit) {
-            Toestel k = new Toestel("Fiets", true);
-            Assert.Equal("Fiets", k.Type);
+            Toestel k = new Toestel("fiets", true);
+            Assert.Equal("fiets", k.Type);
             k.ZetType(naamIn);
             Assert.Equal(naamUit, k.Type);
         }
@@ -63,7 +86,7 @@ namespace DomeinTest {
         public void Ctor_valid() {
             Toestel t = new Toestel("loopband", true);
             Assert.Equal("loopband", t.Type);
-            //Assert.Equal("loopband url", t.AfbeeldingUrl);
+            Assert.True(t.Beschikbaar);
         }
 
         [Theory]
@@ -79,6 +102,6 @@ namespace DomeinTest {
         //[InlineData("loopband", null)]
         public void Ctor_invalid(string toestelnaam) { //TODO
             Assert.Throws<ToestelException>(() => new Toestel(toestelnaam, false));
-        }     
+        }
     }
 }

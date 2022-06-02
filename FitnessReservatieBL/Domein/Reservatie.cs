@@ -21,15 +21,6 @@ namespace FitnessReservatieBL.Domein {
         }
         public void ZetKlant(Klant klant) {
             if (klant == null) { throw new ReservatieException("ZetKlant - Klant is null"); }
-            if (klant.ID == 0) { throw new ReservatieException("ZetKlant - KlantID is niet ingesteld"); }
-            if (string.IsNullOrWhiteSpace(klant.Voornaam)) { throw new ReservatieException("ZetKlant - Voornaam klant is ongeldig"); }
-            if (string.IsNullOrWhiteSpace(klant.Achternaam)) { throw new ReservatieException("ZetKlant - Achternaam klant is ongeldig"); }
-            try {
-                EmailControle.ControleerEmail(klant.Email);
-            } catch (EmailControleException) {
-                throw new ReservatieException("ZetKlant - klant heeft een ongeldige email");
-            }
-
             Klant = klant;
         }
 

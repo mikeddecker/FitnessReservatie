@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace DomeinTest {
-    public class UnitTestKlant {
+    public class UnitTestAdmin {
         [Fact]
         public void ZetId_valid() {
             Persoon k = new Klant(1, "mike", "de decker", "mikeddecker@hotmail.com");
@@ -77,7 +77,7 @@ namespace DomeinTest {
         [InlineData("mikeddecker@hotmail.com   ", "mikeddecker@hotmail.com")]
         [InlineData("mike@gmail.student.com", "mike@gmail.student.com")]
         [InlineData("mike.dedecker@student.hogent.be", "mike.dedecker@student.hogent.be")]
-        [InlineData("Mike.Dedecker@student.hogent.be", "mike.dedecker@student.hogent.be")]
+        [InlineData("MIKE.dedecker@student.hogent.be", "mike.dedecker@student.hogent.be")]
         public void ZetEmail_valid(string emailIn, string emailUit) {
             Persoon k = new Klant(3, "mike", "de decker", "ik@gmail.com");
             Assert.Equal("ik@gmail.com", k.Email);

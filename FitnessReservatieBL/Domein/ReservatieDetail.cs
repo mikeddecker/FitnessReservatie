@@ -28,12 +28,13 @@ namespace FitnessReservatieBL.Domein {
         }
         public void ZetToestel(Toestel t) {
             if (t == null) { throw new ReservatieDetailException("ZetToestel - toestel is null"); }
-            if (!t.Beschikbaar) { throw new ReservatieDetailException("ZetToestel - toestel is niet beschikbaar"); }
+            // onderstaande wordt afgedwongen door de reservatieManager (want als ik inlaad, kan een toestel momenteel nog wel onbeschikbaar zijn)
+            //if (!t.Beschikbaar) { throw new ReservatieDetailException("ZetToestel - toestel is niet beschikbaar"); }
             Toestel = t;
         }
-        public void ZetTijdslot(Tijdslot tijdslotID) {
-            if (tijdslotID.TijdslotID <= 0) { throw new ReservatieDetailException("ZetTijdslot - Ongeldige tijdslotID"); }
-            Tijdslot = tijdslotID;
+        public void ZetTijdslot(Tijdslot tijdslot) {
+            if (tijdslot == null) { throw new ReservatieDetailException("ZetTijdslot - geen tijdslot"); }
+            Tijdslot = tijdslot;
         }
 
         public void ZetIsNieuw(bool isNieuw) {

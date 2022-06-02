@@ -10,7 +10,7 @@ namespace FitnessReservatieBL.Domein {
 
         public Tijdslot(int id, TimeSpan beginuur, TimeSpan einduur) {
             ZetID(id);
-            ZetBeginUur(beginuur);
+            ZetBeginuur(beginuur);
             ZetEinduur(einduur);
         }
         public int TijdslotID { get; private set; } //id van uit de databank
@@ -21,8 +21,9 @@ namespace FitnessReservatieBL.Domein {
             if (id <= 0) { throw new TijdslotException("ZetID - ongeldige ID"); }
             TijdslotID = id;
         }
-        public void ZetBeginUur(TimeSpan beginuur) {
+        public void ZetBeginuur(TimeSpan beginuur) {
             if (beginuur.TotalHours > 24) { throw new TijdslotException("ZetBeginuur - ongeldig beginuur"); }
+            if (Einduur != default(TimeSpan) && Einduur < beginuur) { throw new TijdslotException("ZetBeginuur - beginuur is groter dan einduur"); } 
             Beginuur = beginuur;
         }
         public void ZetEinduur(TimeSpan einduur) {
@@ -35,7 +36,6 @@ namespace FitnessReservatieBL.Domein {
             return obj is Tijdslot tijdslot &&
                    TijdslotID == tijdslot.TijdslotID;
         }
-
         public override int GetHashCode() {
             return HashCode.Combine(TijdslotID);
         }
