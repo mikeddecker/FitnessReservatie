@@ -26,7 +26,7 @@ namespace FitnessReservatieBL.Domein {
 
         public void VoegReservatieDetailToe(ReservatieDetail detail) {
             if (detail == null) { throw new ReservatieException("VoegReservatieDetailToe - ReservatieDetails mogen niet leeg zijn"); }
-            if (ReservatieDetails.Contains(detail)) { throw new ReservatieDetailException("VoegReservatieDetailToe - details zaten al in de reservatie"); }
+            if (ReservatieDetails.Contains(detail)) { throw new ReservatieException("VoegReservatieDetailToe - details zaten al in de reservatie"); }
             ReservatieDetails.Add(detail);
         }
 
