@@ -30,6 +30,7 @@ namespace FitnessReservatieBL.Managers {
                 throw new ToestelManagerException($"GeefBeschikbareToestellen - \"{zoektekst}\" niet gevonden");
             }
         }
+        
         public Toestel GeefToestelMetID(int id) {
             if (toestellen.ContainsKey(id) && toestellen[id].Beschikbaar) {
                 return toestellen[id];

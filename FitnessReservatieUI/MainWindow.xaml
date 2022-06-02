@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservatieUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Blue Fitness" Height="450" Width="800">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,7 +15,7 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -27,9 +27,8 @@
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Label Grid.Row="1" Grid.Column="1" Content="Blue Fitness" FontSize="48" HorizontalAlignment="Center"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Name="EmailTextBox" Text="email" Margin="5,5,5,5" FontSize="22" />
-        
-        
-        <Button Grid.Row="4" Grid.Column="1" Content="Login" Margin="40,5,40,5" FontSize="28" Background="#FF0064FF" Click="LoginButton_Click"/>
+        <Label Grid.Row="2" Grid.Column="1" Content="Geef id or email" FontSize="24" HorizontalAlignment="Center"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Name="InputTextBox" Text="" Margin="5,5,5,5" FontSize="22" />
+        <Button Grid.Row="4" Grid.Column="1" Content="Login" Margin="80,5,80,5" FontSize="28" Background="#FF0064FF" Click="LoginButton_Click"/>
     </Grid>
 </Window>

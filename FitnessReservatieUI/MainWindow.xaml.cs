@@ -34,9 +34,8 @@ namespace FitnessReservatieUI {
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
 
             try {
-                string email = EmailTextBox.Text;
-                Persoon persoon = persoonManager.LogPersoonIn(email);
-                EmailControle.ControleerEmail(email); // gooit exception als het niet oke is. Deze vangen we op en tonen we.
+                string input = InputTextBox.Text;
+                Persoon persoon = persoonManager.LogPersoonIn(input);
 
                 if (typeof(Klant) == persoon.GetType()) {                  
                     KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon);

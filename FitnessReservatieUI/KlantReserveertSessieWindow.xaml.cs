@@ -24,7 +24,8 @@ namespace FitnessReservatieUI {
         public KlantReserveertSessieWindow(Klant klant) {
             InitializeComponent();
             //this.klant = klant;
-            reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()), klant);
+            reservatieManager = new ReservatieManager(new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()),
+                new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()), klant);
 
             // velden invullen en constricties opleggen.
             ReservatieDatePicker.DisplayDateStart = DateTime.Today;

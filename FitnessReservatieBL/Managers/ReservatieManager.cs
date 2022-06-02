@@ -11,13 +11,15 @@ using System.Threading.Tasks;
 namespace FitnessReservatieBL.Managers {
     public class ReservatieManager {
         private IReservatieRepository reservatieRepo;
+        private IToestelRepository toestelRepo;
         private IReadOnlyList<Tijdslot> tijdsloten;
         private Klant klant;
         private List<ReservatieDetail> toekomstigeReservatiesKlant;
         private List<ReservatieDetail> nieuweReservatiesKlant;
 
-        public ReservatieManager(IReservatieRepository repository, Klant klant) {
+        public ReservatieManager(IReservatieRepository repository,IToestelRepository toestelRepo, Klant klant) {
             reservatieRepo = repository;
+            this.toestelRepo = toestelRepo;
             this.klant = klant;
             tijdsloten = reservatieRepo.GeefTijdsloten();
             toekomstigeReservatiesKlant = reservatieRepo.GeefToekomstigeReservatieDetais(klant.ID);
@@ -29,19 +31,19 @@ namespace FitnessReservatieBL.Managers {
         }
         public List<Toestel> GeefMogelijkeToestellen(DateTime datum, Tijdslot tijdslot) {
             //TODO verplaats method
-            return reservatieRepo.GeefMogelijkeToestellen(datum, tijdslot);
+            return toestelRepo.GeefMogelijkeToestellen(datum, tijdslot);
         }
         public bool MagKlantTijdslotReserveren(ReservatieDetail detail) {
             List<ReservatieDetail> alleDetails = new List<ReservatieDetail>();
             foreach (ReservatieDetail det in toekomstigeReservatiesKlant) { alleDetails.Add(det); }
             foreach (ReservatieDetail det in nieuweReservatiesKlant) { alleDetails.Add(det); }
-            if (IsVrijTijdslotVoorKlant(alleDetails, detail) && MinderDan4ReservatiesOpDag(alleDetails, detail) && Geen3TijdslotenEenzelfdeToestelNaElkaar(alleDetails, detail)) {
+            if (IsVrijTijdslotVoorKlant(alleDetails, detail) && IsMinderDan4ReservatiesOpDag(alleDetails, detail) && IsGeen3TijdslotenEenzelfdeToestelNaElkaar(alleDetails, detail)) {
                 return true;
             }
             return false;
 
         }
-        private bool Geen3TijdslotenEenzelfdeToestelNaElkaar(List<ReservatieDetail> alleDetails, ReservatieDetail nieuwDetail) {
+        private bool IsGeen3TijdslotenEenzelfdeToestelNaElkaar(List<ReservatieDetail> alleDetails, ReservatieDetail nieuwDetail) {
             List<TimeSpan> einduren = alleDetails.Where(det => det.Datum == nieuwDetail.Datum && det.Toestel.Equals(nieuwDetail.Toestel)).Select(det => det.Tijdslot.Einduur).ToList();
             //.Contains(d.Tijdslot.Beginuur)).Select(y => y.Tijdslot.Einduur).OrderBy(t => t).ToList();
             bool rr;
@@ -84,7 +86,7 @@ namespace FitnessReservatieBL.Managers {
             return rr;
 
         }
-        private bool MinderDan4ReservatiesOpDag(List<ReservatieDetail> alleDetails, ReservatieDetail detail) {
+        private bool IsMinderDan4ReservatiesOpDag(List<ReservatieDetail> alleDetails, ReservatieDetail detail) {
             return 4 > alleDetails.Where(d => d.Datum == detail.Datum).Count();
         }
         private bool IsVrijTijdslotVoorKlant(List<ReservatieDetail> alleDetails, ReservatieDetail detail) {

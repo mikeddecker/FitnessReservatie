@@ -15,14 +15,26 @@ namespace FitnessReservatieBL.Managers {
             Repository = repository;
         }
 
-        public Persoon LogPersoonIn(string email) {
+        public Persoon LogPersoonIn(string input) {
             try {
-                // Eerst email controle, gooit exception als het emailadres verkeerd is, geeft true als het een goed email adres is.
-                EmailControle.ControleerEmail(email);
+                // 1) controleren of het een ID is:
+                int? id;
+                string email;
+                if (int.TryParse(input, out int idNotNull)) {
+                    id = (int?)idNotNull;
+                    email = null;
+                } else {
+                    id = null;
+                    // Eerst email controle, gooit exception als het emailadres verkeerd is, geeft true als het een goed email adres is.
+                    EmailControle.ControleerEmail(input);
+                    email = input;
+                }
+
+
 
                 //Nu is de mail toch al enigszins een deftige format.
-                if (Repository.BestaatPersoon(email)) {
-                    return Repository.SelecteerPersoon(email, null);
+                if (Repository.BestaatPersoon(email, id)) {
+                    return Repository.SelecteerPersoon(email, id);
                 } else {
                     throw new PersoonManagerException("LogPersoonIn - Wij kennen dit emailadres niet.");
                 }
@@ -35,4 +47,4 @@ namespace FitnessReservatieBL.Managers {
             }
         }
     }
-}   
+}

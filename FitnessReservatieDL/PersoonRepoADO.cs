@@ -20,13 +20,23 @@ namespace FitnessReservatieDL {
             return new SqlConnection(connectieString);
         }
 
-        public bool BestaatPersoon(string email) {
+        public bool BestaatPersoon(string email, int? id) { // krijgt email en 0 OF null en id
             SqlConnection connection = GetConnection();
-            string query = "SELECT COUNT(*) FROM dbo.Klant WHERE email=@email;";
+            string query = "SELECT COUNT(*) FROM dbo.Klant WHERE ";
+            string emailQueryStuk = "email=@email";
+            string idQueryStuk = "id=@id";
+
+
             try {
                 using (SqlCommand command = connection.CreateCommand()) {
                     connection.Open();
-                    command.Parameters.AddWithValue("@email", email);
+                    if (email != null) {
+                        command.Parameters.AddWithValue("@email", email);
+                        query += emailQueryStuk;
+                    } else {
+                        command.Parameters.AddWithValue("@id", (int)id);
+                        query += idQueryStuk;
+                    }
                     command.CommandText = query;
                     int n = (int)command.ExecuteScalar();
                     if (n > 0) { return true; } else { return false; }
@@ -57,7 +67,7 @@ namespace FitnessReservatieDL {
                         klantcmd.Parameters.AddWithValue("@email", email);
                     } else {
                         klantQuery += idQueryEinde;
-                        klantcmd.Parameters.AddWithValue("@id", id);
+                        klantcmd.Parameters.AddWithValue("@id", (int)id);
                     }
                     klantcmd.CommandText = klantQuery;
 

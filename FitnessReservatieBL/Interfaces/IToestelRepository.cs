@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Interfaces {
     public interface IToestelRepository {
+        List<Toestel> GeefMogelijkeToestellen(DateTime datum, Tijdslot tijdslot);
         void VerwijderToestel(int toestelID);
         void UpdateToestelBeschikbaarheid(int toestelID, bool beschikbaar);
         bool HeeftToestelToekomstigeReservaties(int toestelID);
