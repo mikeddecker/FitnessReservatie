@@ -95,12 +95,7 @@ namespace DomeinTest {
         [InlineData("\n")]
         [InlineData("   \r   ")]
         [InlineData(null)]
-        //[InlineData("loopband", "")]
-        //[InlineData("loopband", " ")]
-        //[InlineData("loopband", "\n")]
-        //[InlineData("loopband", "   \r   ")]
-        //[InlineData("loopband", null)]
-        public void Ctor_invalid(string toestelnaam) { //TODO
+        public void Ctor_invalid(string toestelnaam) { 
             Assert.Throws<ToestelException>(() => new Toestel(toestelnaam, false));
         }
     }

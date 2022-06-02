@@ -24,11 +24,10 @@ namespace FitnessReservatieUI {
     /// </summary>
     public partial class MainWindow : Window {
         private PersoonManager persoonManager;
-        
+
         public MainWindow() {
             InitializeComponent();
             persoonManager = new PersoonManager(new PersoonRepoADO(ConfigurationManager.ConnectionStrings["FitnessReservatieDBConnection"].ToString()));
-            //TODO inloggen met ID
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e) {
@@ -37,7 +36,7 @@ namespace FitnessReservatieUI {
                 string input = InputTextBox.Text;
                 Persoon persoon = persoonManager.LogPersoonIn(input);
 
-                if (typeof(Klant) == persoon.GetType()) {                  
+                if (typeof(Klant) == persoon.GetType()) {
                     KlantReserveertSessieWindow klantReserveertSessieWindow = new KlantReserveertSessieWindow((Klant)persoon);
                     klantReserveertSessieWindow.ShowDialog();
                 } else if (typeof(Admin) == persoon.GetType()) {

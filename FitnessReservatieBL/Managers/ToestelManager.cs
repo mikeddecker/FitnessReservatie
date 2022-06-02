@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Managers {
     public class ToestelManager {
-        //TODO try catch toevoegen bij reservatieManager
         private IToestelRepository toestelRepo;
         private Dictionary<int, Toestel> toestellen = new Dictionary<int, Toestel>(); /* toestelID, toestel : die gelijdelijk aan gevuld wordt, ofwel in een keer gevuld.
                                                       * Adminzaken, alles

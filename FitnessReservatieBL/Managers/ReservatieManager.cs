@@ -17,7 +17,7 @@ namespace FitnessReservatieBL.Managers {
         private List<ReservatieDetail> toekomstigeReservatiesKlant;
         private List<ReservatieDetail> nieuweReservatiesKlant;
 
-        public ReservatieManager(IReservatieRepository repository,IToestelRepository toestelRepo, Klant klant) {
+        public ReservatieManager(IReservatieRepository repository, IToestelRepository toestelRepo, Klant klant) {
             reservatieRepo = repository;
             this.toestelRepo = toestelRepo;
             this.klant = klant;
@@ -26,14 +26,19 @@ namespace FitnessReservatieBL.Managers {
             nieuweReservatiesKlant = new List<ReservatieDetail>();
         }
         public IReadOnlyList<Tijdslot> GeefTijdsloten() {
-            //TODO filteren zodat vandaag enkel uren geeft na dit uur
             return tijdsloten;
         }
         public List<Toestel> GeefMogelijkeToestellen(DateTime datum, Tijdslot tijdslot) {
-            //TODO verplaats method
-            return toestelRepo.GeefMogelijkeToestellen(datum, tijdslot);
+            try {
+                return toestelRepo.GeefMogelijkeToestellen(datum, tijdslot);
+            } catch (Exception ex) {
+                throw new ReservatieManagerException("GeefMogelijkeToestellen(datum, tijdslot)", ex);
+            }
         }
         public bool MagKlantTijdslotReserveren(ReservatieDetail detail) {
+            if (detail.Datum.Date == DateTime.Today && detail.Tijdslot.Beginuur.Hours <= DateTime.Now.Hour) {
+                return false;
+            }
             List<ReservatieDetail> alleDetails = new List<ReservatieDetail>();
             foreach (ReservatieDetail det in toekomstigeReservatiesKlant) { alleDetails.Add(det); }
             foreach (ReservatieDetail det in nieuweReservatiesKlant) { alleDetails.Add(det); }
@@ -93,19 +98,23 @@ namespace FitnessReservatieBL.Managers {
             return !(alleDetails.Where(d => d.Tijdslot == detail.Tijdslot && d.Datum == detail.Datum).Count() > 0);
         }
         public void SchrijfReservatieInDB() {
-            Reservatie reservatie = new Reservatie(klant);
-            foreach (ReservatieDetail detail in nieuweReservatiesKlant) {
-                reservatie.VoegReservatieDetailToe(detail);
+            try {
+                Reservatie reservatie = new Reservatie(klant);
+                foreach (ReservatieDetail detail in nieuweReservatiesKlant) {
+                    reservatie.VoegReservatieDetailToe(detail);
+                }
+                if (reservatie == null) { throw new ReservatieManagerException("SchrijfReservatieInDB - reservatie is null"); }
+                //if (reservatie.Klant.ID <= 0) { throw new ReservatieManagerException("SchrijfReservatieInDB - klant ID is niet ingevuld"); }
+                if (reservatie.ReservatieDetails.Count() == 0) { throw new ReservatieManagerException("SchrijfReservatieInDB - Geen reservatiedetails ingevuld"); }
+                reservatieRepo.SchrijfReservatieInDB(reservatie);
+                foreach (ReservatieDetail detail in nieuweReservatiesKlant) {
+                    detail.ZetIsNieuw(false);
+                }
+                toekomstigeReservatiesKlant = toekomstigeReservatiesKlant.Concat(nieuweReservatiesKlant).ToList();
+                nieuweReservatiesKlant.Clear();
+            } catch (Exception ex) {
+                throw new ReservatieManagerException("SchrijfReservatieInDB", ex);
             }
-            if (reservatie == null) { throw new ReservatieManagerException("SchrijfReservatieInDB - reservatie is null"); }
-            //if (reservatie.Klant.ID <= 0) { throw new ReservatieManagerException("SchrijfReservatieInDB - klant ID is niet ingevuld"); }
-            if (reservatie.ReservatieDetails.Count() == 0) { throw new ReservatieManagerException("SchrijfReservatieInDB - Geen reservatiedetails ingevuld"); }
-            reservatieRepo.SchrijfReservatieInDB(reservatie);
-            foreach (ReservatieDetail detail in nieuweReservatiesKlant) {
-                detail.ZetIsNieuw(false);
-            }
-            toekomstigeReservatiesKlant = toekomstigeReservatiesKlant.Concat(nieuweReservatiesKlant).ToList();
-            nieuweReservatiesKlant.Clear();
         }
 
         public void VoegToeAanNieuweReservatie(ReservatieDetail detail) {
