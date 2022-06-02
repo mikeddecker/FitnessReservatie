@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="Toestel Toevoegen" Height="200" Width="300">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0064FF" Offset="0.007"/>
+                <GradientStop Color="#FFAAFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -19,6 +25,6 @@
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Toestel toevoegen" Margin="5,5,5,5" VerticalAlignment="Center" FontSize="20"/>
         <Label Grid.Row="1" Grid.Column="0"  Content="Toestelnaam" Margin="5,5,5,5"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="ToestelNaamTextBox" Margin="5,5,5,5"/>
-        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="voeg toe" Margin="5,5,5,5" Click="Button_Click"/>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="voeg toe" Margin="5,5,5,5" Background="#FF0064FF"  Click="Button_Click"/>
     </Grid>
 </Window>

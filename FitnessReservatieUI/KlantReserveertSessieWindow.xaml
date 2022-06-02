@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservatieUI"
         mc:Ignorable="d"
-        Title="Reserveren" Height="auto" Width="800">
+        Title="Reserveren" Height="400" Width="800">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0064FF" Offset="0.007"/>
+                <GradientStop Color="#FFAAFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition Width="*"/>
@@ -17,25 +23,37 @@
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="Reserveren" FontSize="42"/>
-        <TextBlock Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" Text="Toekomstige reservaties" FontSize="16" Margin="5,5,5,5" VerticalAlignment="Bottom"/>
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="Datum" FontSize="20" Margin="5,5,5,5"/>
-        <DatePicker Grid.Row="2" Grid.Column="2" Name="ReservatieDatePicker" Margin="5,5,5,5" FirstDayOfWeek="Monday" SelectedDateChanged="ReservatieDatePicker_SelectedDateChanged"/>
-        <ListBox Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="3" Name="ReservatieDetailListBox"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="Tijdslot" FontSize="20" Margin="5,5,5,5"/>
-        <ComboBox Grid.Row="3" Grid.Column="2" Name="TijdslotComboBox" Margin="5,5,5,5" SelectionChanged="TijdslotComboBox_SelectionChanged"/>
-        <TextBlock Grid.Row="4" Grid.Column="1" Text="Toestel" FontSize="20" Margin="5,5,5,5"/>
-        <ComboBox Grid.Row="4" Grid.Column="2" Name="ToestelComboBox" Margin="5,5,5,5" IsEnabled="False" SelectionChanged="ToestelComboBox_SelectionChanged"/>
-        
-        <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Name="VoegToeButton" Content="VoegToe" IsEnabled="False" Margin="5,5,5,5" Click="VoegToeButton_Click"/>
-        <Button Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Name="ReserveerButton" Content="Reserveer" IsEnabled="False" Margin="5,5,5,5" Click="ReserveerButton_Click"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Text="Reserveren" FontSize="42"/>
+        <TextBlock Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Text="Toekomstige reservaties" FontSize="16" Margin="5,5,5,5" VerticalAlignment="Bottom"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Datum" FontSize="20" Margin="5,5,5,5"/>
+        <DatePicker Grid.Row="3" Grid.Column="2" Name="ReservatieDatePicker" Margin="5,5,5,5" FirstDayOfWeek="Monday" SelectedDateChanged="ReservatieDatePicker_SelectedDateChanged">
+            <DatePicker.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                    <GradientStop Color="#FFA3AEB9"/>
+                    <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                    <GradientStop Color="#FF718597" Offset="0.375"/>
+                    <GradientStop Color="#000092FF" Offset="1"/>
+                </LinearGradientBrush>
+            </DatePicker.BorderBrush>
+        </DatePicker>
+        <ListBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="3" Name="ReservatieDetailListBox" BorderBrush="#FF0040FF"/>
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Tijdslot" FontSize="20" Margin="5,5,5,5"/>
+        <ComboBox Grid.Row="4" Grid.Column="2" Name="TijdslotComboBox" Margin="5,5,5,5" SelectionChanged="TijdslotComboBox_SelectionChanged" BorderBrush="#FF0040FF"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="Toestel" FontSize="20" Margin="5,5,5,5"/>
+        <ComboBox Grid.Row="5" Grid.Column="2" Name="ToestelComboBox" Margin="5,5,5,5" IsEnabled="False" SelectionChanged="ToestelComboBox_SelectionChanged" BorderBrush="#FF0040FF"/>
+
+        <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Name="VoegToeButton" Content="VoegToe" IsEnabled="False" Margin="5,5,5,5" Click="VoegToeButton_Click" Background="#FF0064FF" BorderBrush="#FF0040FF"/>
+        <Button Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" Name="ReserveerButton" Content="Reserveer" IsEnabled="False" Margin="5,5,5,5" Click="ReserveerButton_Click" Background="#FF0064FF" BorderBrush="#FF0040FF"/>
+        <Button Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5" Name="LogOutButton" Content="Log Out" IsEnabled="True" Margin="50,25,50,25" Click="LogOutButton_Click" Background="#FF0064FF" BorderBrush="#FF0040FF"/>
     </Grid>
 </Window>

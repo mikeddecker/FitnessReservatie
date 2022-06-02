@@ -107,5 +107,9 @@ namespace FitnessReservatieUI {
             ResetDetails();
             ReserveerButton.IsEnabled = false;
         }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e) {
+            Close();
+        }
     }
 }

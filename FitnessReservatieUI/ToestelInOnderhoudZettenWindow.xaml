@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="Toestel updaten" Height="300" Width="350">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0064FF" Offset="0.007"/>
+                <GradientStop Color="#FFAAFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="3*"/>
@@ -22,11 +28,11 @@
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="Zet toestel in onderhoud" Margin="5,5,5,5" VerticalAlignment="Center" FontSize="20"/>
         <Label Grid.Row="1" Grid.Column="0"  Content="ID" Margin="5,5,5,5"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="IDTextBox" Margin="5,5,5,5" IsEnabled="True" TextChanged="IDTextBox_TextChanged" InputScope="Number"/>
-        <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Name="ZoekButton" Content="Zoek" Margin="5,5,5,5" IsEnabled="False" Click="ZoekButton_Click"/>
+        <Button Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Name="ZoekButton" Content="Zoek" Margin="5,5,5,5" Background="#FF0064FF"  IsEnabled="False" Click="ZoekButton_Click"/>
         <Label Grid.Row="2" Grid.Column="0"  Content="Toestelnaam" Margin="5,5,5,5"/>
         <TextBox Grid.Row="2" Grid.Column="1" Name="ToestelnaamTextBox" Margin="5,5,5,5" IsEnabled="True" TextChanged="ToestelnaamTextBox_TextChanged"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Toestelinfo:" Margin="5,5,5,5"/>
         <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Name="ToestelInfoLabel" Margin="5,5,5,5"/>
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Name="UpdateButton" Content="update" Margin="5,5,5,5" IsEnabled="false" Click="UpdateToestelButton_Click"/>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Name="UpdateButton" Content="update" Margin="5,5,5,5" Background="#FF0064FF"  IsEnabled="false" Click="UpdateToestelButton_Click"/>
     </Grid>
 </Window>

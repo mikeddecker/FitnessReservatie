@@ -7,11 +7,17 @@
         mc:Ignorable="d"
         Title="Selecteer toestel" Height="300" Width="200">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0064FF" Offset="0.007"/>
+                <GradientStop Color="#FFAAFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" Name="ToestelListBox" Margin="5,5,5,5" SelectionChanged="ToestelListBox_SelectionChanged"/>
-        <Button Grid.Row="1" Name="SelecteerToestelButton" Content="Selecteer toestel" Margin="5,5,5,5" IsEnabled="False" Click="SelecteerToestelButton_Click"/>
+        <ListBox Grid.Row="0" Name="ToestelListBox" Margin="5,5,5,5" SelectionChanged="ToestelListBox_SelectionChanged" Background="#FF8BB7FF"/>
+        <Button Grid.Row="1" Name="SelecteerToestelButton" Content="Selecteer toestel" Margin="5,5,5,5"  Background="#FF0064FF" BorderBrush="#FF0040FF" IsEnabled="False" Click="SelecteerToestelButton_Click"/>
     </Grid>
 </Window>

@@ -7,15 +7,21 @@
         mc:Ignorable="d"
         Title="Overzicht" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0064FF"/>
+                <GradientStop Color="#FFAAFFFF" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Name="ToestelToevoegenButton" Content="Toestel toevoegen" Margin="30,20,30,10" Click="ToestelToevoegenButton_Click"/>
-        <Button Grid.Row="1" Name="ToestelVerwijderenButton" Content="Toestel verwijderen" Margin="30,10,30,10" Click="ToestelVerwijderenButton_Click"/>
-        <Button Grid.Row="2" Name="ToestelInOnderhoudButton" Content="Toestel in onderhoud plaatsen door defect" Margin="30,10,30,10" Click="ToestelInOnderhoudButton_Click"/>
-        <Button Grid.Row="3" Name="LogOutButton" Content="Log out" Margin="30,10,30,20" Click="LogOutButton_Click"/>
+        <Button Grid.Row="0" Name="ToestelToevoegenButton" Content="Toestel toevoegen" Margin="30,20,30,10" Click="ToestelToevoegenButton_Click" Background="#FF0064FF" FontSize="20"/>
+        <Button Grid.Row="1" Name="ToestelVerwijderenButton" Content="Toestel verwijderen" Margin="30,10,30,10" Click="ToestelVerwijderenButton_Click" Background="#FF0064FF" FontSize="20"/>
+        <Button Grid.Row="2" Name="ToestelInOnderhoudButton" Content="Toestel in onderhoud plaatsen door defect" Margin="30,10,30,10" Click="ToestelInOnderhoudButton_Click" Background="#FF0064FF" FontSize="20"/>
+        <Button Grid.Row="3" Name="LogOutButton" Content="Log out" Margin="30,10,30,20" Click="LogOutButton_Click" Background="#FF0064FF" FontSize="20"/>
     </Grid>
 </Window>
