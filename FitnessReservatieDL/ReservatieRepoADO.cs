@@ -15,7 +15,7 @@ namespace FitnessReservatieDL {
         public ReservatieRepoADO(string connectieString) {
             this.connectieString = connectieString;
         }
-
+        
         private SqlConnection GetConnection() {
             return new SqlConnection(connectieString);
         }

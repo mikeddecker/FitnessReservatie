@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domein {
     public abstract class Persoon {
-        internal Persoon(int iD, string voornaam, string achternaam, string email) {
+        protected Persoon(int iD, string voornaam, string achternaam, string email) {
             ZetID(iD);
             ZetVoornaam(voornaam);
             ZetAchternaam(achternaam);
@@ -36,11 +36,11 @@ namespace FitnessReservatieBL.Domein {
         public void ZetEmail(string email) {
             //TODO emailcontrole opsplitsen naar EmailControle klasse + unit test aanpassen
             if (string.IsNullOrWhiteSpace(email)) { throw new KlantException("ZetEmail - null or white space"); }
-            if (!email.Contains("@")) { throw new KlantException("ZetEmail - Email bevat geen @"); }
-            if (email.StartsWith("@")) { throw new KlantException("ZetEmail - Email start met @"); }
-            if (email.EndsWith("@")) { throw new KlantException("ZetEmail - Email eindigt met @"); }
-            if (!email.Substring(email.IndexOf("@")).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen correct domein"); }
-            if (email.Substring(email.IndexOf("@") + 1, 1).Contains(".")) { throw new KlantException("ZetEmail - Email bevat geen domein zoals .be of ..."); }
+            try {
+                EmailControle.ControleerEmail(email);
+            } catch (Exception ex) {
+                throw new KlantException("ZetEmail - fout in de email", ex);
+            }
             Email = email.Trim().ToLower();
         }
     }
